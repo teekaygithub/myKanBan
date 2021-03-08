@@ -12,8 +12,8 @@ import javax.persistence.Table;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private int id;
+    @Column (name="projectid")
+    private int projectId;
 
     @Column
     private String title;
@@ -24,11 +24,11 @@ public class Project {
     public Project() {}
 
     public int getProjectId() {
-        return id;
+        return projectId;
     }
 
     public void setProjectId(int id) {
-        this.id = id;
+        this.projectId = id;
     }
 
     public String getTitle() {

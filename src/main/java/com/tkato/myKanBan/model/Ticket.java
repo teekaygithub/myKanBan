@@ -11,9 +11,9 @@ import javax.persistence.Table;
 @Table
 public class Ticket {
     @Id
-    @Column
+    @Column (name="ticketid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int ticketId;
 
     @Column
     private String title;
@@ -21,15 +21,15 @@ public class Ticket {
     @Column
     private String description;
 
-    @Column
+    @Column (name="projectid")
     private int projectId;
 
     public int getId() {
-        return id;
+        return ticketId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.ticketId = id;
     }
 
     public String getTitle() {

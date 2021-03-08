@@ -3,7 +3,9 @@ package com.tkato.myKanBan.controller;
 import java.util.List;
 
 import com.tkato.myKanBan.model.Project;
+import com.tkato.myKanBan.model.Ticket;
 import com.tkato.myKanBan.service.ProjectService;
+import com.tkato.myKanBan.service.TicketService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -22,6 +24,9 @@ public class MainController {
 
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    TicketService ticketService;
     
     @GetMapping("/all")
     public List<Project> getAllProjects() {
@@ -32,6 +37,11 @@ public class MainController {
     public void addProject(@RequestBody Project project) {
         System.out.println(project);
         projectService.addNewProject(project);
+    }
+
+    @GetMapping("/alltickets")
+    public List<Ticket> getAllTickets() {
+        return ticketService.getAllTickets();
     }
 
     @GetMapping("/")
