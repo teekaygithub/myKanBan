@@ -2,6 +2,8 @@ package com.tkato.myKanBan.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +25,10 @@ public class Ticket {
 
     @Column (name="projectid")
     private int projectId;
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Status status;
 
     public int getId() {
         return ticketId;
@@ -54,5 +60,25 @@ public class Ticket {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        for (Status stat : Status.values()) {
+            Status temp = Status.valueOf(status);
+            if (stat.equals(temp)) {
+                this.status = temp;
+            }
+        }
+    }
+
+    public enum Status {
+        TODO,
+        INPROGRESS,
+        DONE,
+        CANCELLED
     }
 }
