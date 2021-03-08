@@ -28,7 +28,7 @@ class ProjectContainer extends React.Component {
 
         if (this.state.projects.length > 0) {
             return (
-                <div className="container card-columns">
+                <div className="container card-deck">
                     {projectElem}
                 </div>
             );
