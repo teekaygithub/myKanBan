@@ -20,4 +20,8 @@ public class ProjectService {
         projectRepository.findAll().forEach(pj -> projects.add(pj));
         return projects;
     }
+
+    public void addNewProject(Project project) {
+        projectRepository.save(project);
+    }
 }

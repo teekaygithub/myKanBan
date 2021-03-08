@@ -1,7 +1,5 @@
 package com.tkato.myKanBan.model;
 
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,19 +13,22 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private UUID projectId;
+    private int id;
 
     @Column
     private String title;
 
+    @Column
+    private String description;
+
     public Project() {}
 
-    public UUID getProjectId() {
-        return projectId;
+    public int getProjectId() {
+        return id;
     }
 
-    public void setProjectId(UUID id) {
-        this.projectId = id;
+    public void setProjectId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -36,5 +37,13 @@ public class Project {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
