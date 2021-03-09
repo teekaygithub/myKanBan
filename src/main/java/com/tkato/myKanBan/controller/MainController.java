@@ -2,6 +2,8 @@ package com.tkato.myKanBan.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.Ticket;
 import com.tkato.myKanBan.service.ProjectService;
@@ -9,11 +11,13 @@ import com.tkato.myKanBan.service.TicketService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -42,8 +46,8 @@ public class MainController {
     }
 
     @PostMapping("/addproject")
-    public void addProject(@RequestBody Project project) {
-        System.out.println(project);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addProject(@Valid @RequestBody Project project) {
         projectService.addNewProject(project);
     }
 

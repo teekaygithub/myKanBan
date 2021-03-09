@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table
@@ -18,12 +19,14 @@ public class Ticket {
     private int ticketId;
 
     @Column
+    @NotEmpty(message = "Please provide a ticket title")
     private String title;
 
     @Column
     private String description;
 
     @Column (name="projectid")
+    @NotEmpty(message = "Please provide the ID for the associated project")
     private int projectId;
 
     @Enumerated(EnumType.STRING)
