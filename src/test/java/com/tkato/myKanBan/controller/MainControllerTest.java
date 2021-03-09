@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.util.List;
 
 import com.tkato.myKanBan.model.Project;
+import com.tkato.myKanBan.model.Ticket;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,17 @@ public class MainControllerTest {
         );
 
         assertEquals(HttpStatus.OK, res.getStatusCode());
-        System.out.format("len: %d\n", res.getBody().size());
+    }
+
+    @Test
+    public void getAllTicketsTest() {
+        ResponseEntity<List<Ticket>> res = restTemplate.exchange(
+            "http://localhost:" + port + "/api/alltickets",
+            HttpMethod.GET,
+            null,
+            new ParameterizedTypeReference<List<Ticket>>(){}
+        );
+
+        assertEquals(HttpStatus.OK, res.getStatusCode());
     }
 }
