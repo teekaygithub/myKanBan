@@ -13,8 +13,8 @@ import javax.validation.constraints.NotEmpty;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name="projectid")
-    private int projectId;
+    @Column
+    private int id;
 
     @Column
     @NotEmpty(message = "Please input a project title")
@@ -26,11 +26,11 @@ public class Project {
     public Project() {}
 
     public int getProjectId() {
-        return projectId;
+        return id;
     }
 
     public void setProjectId(int id) {
-        this.projectId = id;
+        this.id = id;
     }
 
     public String getTitle() {

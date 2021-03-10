@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table
@@ -26,11 +28,14 @@ public class Ticket {
     private String description;
 
     @Column (name="projectid")
-    @NotEmpty(message = "Please provide the ID for the associated project")
-    private int projectId;
+    // @NotEmpty(message = "Please provide the ID for the associated project")
+    @NotNull(message = "Please provide the ID for the associated project")
+    @PositiveOrZero
+    private Integer projectId;
 
     @Enumerated(EnumType.STRING)
     @Column
+    @NotNull(message = "Must start with status of TODO")
     private Status status;
 
     public int getId() {
@@ -57,11 +62,11 @@ public class Ticket {
         this.description = description;
     }
 
-    public int getProjectId() {
+    public Integer getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(int projectId) {
+    public void setProjectId(Integer projectId) {
         this.projectId = projectId;
     }
 

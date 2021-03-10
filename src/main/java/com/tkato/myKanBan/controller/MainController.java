@@ -12,6 +12,7 @@ import com.tkato.myKanBan.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 @RequestMapping("/api")
 @CrossOrigin("http://localhost:3000")
+@Validated
 public class MainController {
 
     @Autowired
@@ -54,6 +56,12 @@ public class MainController {
     @GetMapping("/alltickets")
     public List<Ticket> getAllTickets() {
         return ticketService.getAllTickets();
+    }
+
+    @PostMapping("/addticket")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addNewTicket(@RequestBody Ticket ticket) {
+        ticketService.addNewTicket(ticket);
     }
 
     // For testing only

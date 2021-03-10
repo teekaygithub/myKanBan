@@ -20,4 +20,9 @@ public class TicketService {
         ticketRepository.findAll().forEach(ticket -> tickets.add(ticket));
         return tickets;
     }
+
+    public void addNewTicket(Ticket ticket) {
+        System.out.format("ticket's project ID: %d\n", ticket.getProjectId());
+        ticketRepository.save(ticket);
+    }
 }
