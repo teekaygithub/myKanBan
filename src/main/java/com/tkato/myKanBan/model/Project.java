@@ -25,11 +25,11 @@ public class Project {
 
     public Project() {}
 
-    public int getProjectId() {
+    public int getId() {
         return id;
     }
 
-    public void setProjectId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

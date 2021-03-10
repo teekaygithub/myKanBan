@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,17 +35,23 @@ public class MainController {
     @Autowired
     TicketService ticketService;
 
-    // TODO: Get a specific project
     // TODO: Update a project
     // TODO: Delete a project
     // TODO: Get a specific ticket
-    // TODO: Add a new ticket for a specific project
     // TODO: Update a ticket
     // TODO: Delete a ticket
 
+    // PROJECT ROUTES
     @GetMapping("/all")
     public List<Project> getAllProjects() {
         return projectService.getAllProjects();
+    }
+
+    // TODO: Handle 'NoSuchElementException'
+    // TODO: Functional test
+    @GetMapping("/project/{id}")
+    public Project getProject(@PathVariable Integer id) {
+        return projectService.getProjectById(id);
     }
 
     @PostMapping("/addproject")
@@ -53,6 +60,7 @@ public class MainController {
         projectService.addNewProject(project);
     }
 
+    // TICKET ROUTES
     @GetMapping("/alltickets")
     public List<Ticket> getAllTickets() {
         return ticketService.getAllTickets();

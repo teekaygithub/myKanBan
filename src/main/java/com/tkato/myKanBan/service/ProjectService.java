@@ -21,6 +21,10 @@ public class ProjectService {
         return projects;
     }
 
+    public Project getProjectById(Integer id) {
+        return projectRepository.findById(id).get();
+    }
+
     public void addNewProject(Project project) {
         projectRepository.save(project);
     }

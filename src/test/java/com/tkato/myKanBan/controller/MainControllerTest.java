@@ -69,6 +69,31 @@ public class MainControllerTest {
     }
 
     @Test
+    public void addNewTicketTest() {
+        // First get project ID
+        ResponseEntity<List<Project>> res = restTemplate.exchange(
+            "http://localhost:" + port + "/api/all", 
+            HttpMethod.GET, 
+            null, 
+            new ParameterizedTypeReference<List<Project>>(){}
+        );
+
+        final Integer projectId = res.getBody().get(0).getId();
+
+        // Build new ticket request
+        Ticket test = new Ticket();
+        test.setTitle("test ticket");
+        test.setProjectId(projectId);
+        test.setStatus("TODO");
+
+        ResponseEntity<String> response = restTemplate.postForEntity(
+            "http://localhost:" + port + "/api/addticket", test, String.class
+        );
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
+
+    @Test
     public void getAllTicketsTest() {
         ResponseEntity<List<Ticket>> res = restTemplate.exchange(
             "http://localhost:" + port + "/api/alltickets",
