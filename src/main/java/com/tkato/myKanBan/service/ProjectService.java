@@ -29,6 +29,13 @@ public class ProjectService {
         projectRepository.save(project);
     }
 
+    public void modifyProject(Integer id, Project project) {
+        Project temp = getProjectById(id);
+        temp.setTitle(project.getTitle());
+        temp.setDescription(project.getDescription());
+        projectRepository.save(temp);
+    }
+
     public void deleteProjectById(Integer id) {
         projectRepository.deleteById(id);
     }
