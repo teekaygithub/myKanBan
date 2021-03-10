@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +37,6 @@ public class MainController {
     TicketService ticketService;
 
     // TODO: Update a project
-    // TODO: Delete a project
     // TODO: Get a specific ticket
     // TODO: Update a ticket
     // TODO: Delete a ticket
@@ -48,7 +48,7 @@ public class MainController {
     }
 
     // TODO: Handle 'NoSuchElementException'
-    // TODO: Functional test
+    // TODO: Integration test
     @GetMapping("/project/{id}")
     public Project getProject(@PathVariable Integer id) {
         return projectService.getProjectById(id);
@@ -58,6 +58,13 @@ public class MainController {
     @ResponseStatus(HttpStatus.CREATED)
     public void addProject(@Valid @RequestBody Project project) {
         projectService.addNewProject(project);
+    }
+
+    // TODO: Integration test
+    // TODO: Handle 'java.sql.SQLIntegrityConstraintViolationException'
+    @DeleteMapping("/project/{id}")
+    public void deleteProject(@PathVariable Integer id) {
+        projectService.deleteProjectById(id);
     }
 
     // TICKET ROUTES

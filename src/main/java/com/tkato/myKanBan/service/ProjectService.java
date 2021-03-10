@@ -28,4 +28,8 @@ public class ProjectService {
     public void addNewProject(Project project) {
         projectRepository.save(project);
     }
+
+    public void deleteProjectById(Integer id) {
+        projectRepository.deleteById(id);
+    }
 }
