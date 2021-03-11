@@ -25,6 +25,10 @@ public class TicketService {
         return ticketRepository.findById(id).get();
     }
 
+    public List<Ticket> getTicketByProjectId(Integer projectId) {
+        return ticketRepository.findByProjectId(projectId);
+    }
+
     public void addNewTicket(Ticket ticket) {
         System.out.format("ticket's project ID: %d\n", ticket.getProjectId());
         ticketRepository.save(ticket);

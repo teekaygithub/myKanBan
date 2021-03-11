@@ -77,6 +77,11 @@ public class MainController {
         return ticketService.getAllTickets();
     }
 
+    @GetMapping("/project/ticket/{projectId}")
+    public List<Ticket> getTicketByProject(@PathVariable Integer projectId) {
+        return ticketService.getTicketByProjectId(projectId);
+    }
+
     // TODO: Integration test
     @GetMapping("/ticket/{id}")
     public Ticket getTicket(@PathVariable Integer id) {
