@@ -38,4 +38,8 @@ public class TicketService {
         temp.setProjectId(ticket.getProjectId());
         ticketRepository.save(temp);
     }
+
+    public void deleteTicket(Integer id) {
+        ticketRepository.deleteById(id);
+    }
 }
