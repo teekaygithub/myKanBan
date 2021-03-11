@@ -91,9 +91,8 @@ public class MainController {
         ticketService.addNewTicket(ticket);
     }
 
-    // For testing only
-    @GetMapping("/")
-    public String testGet() {
-        return "GET request complete";
+    @PutMapping("/ticket/{id}")
+    public void modifyTicket(@PathVariable Integer id, @RequestBody Ticket ticket) {
+        ticketService.modifyTicket(id, ticket);
     }
 }

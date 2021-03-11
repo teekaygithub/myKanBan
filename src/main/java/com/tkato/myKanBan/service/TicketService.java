@@ -29,4 +29,13 @@ public class TicketService {
         System.out.format("ticket's project ID: %d\n", ticket.getProjectId());
         ticketRepository.save(ticket);
     }
+
+    public void modifyTicket(Integer id, Ticket ticket) {
+        Ticket temp = ticketRepository.findById(id).get();
+        temp.setTitle(ticket.getTitle());
+        temp.setDescription(ticket.getDescription());
+        temp.setStatus(ticket.getStatus().toString());
+        temp.setProjectId(ticket.getProjectId());
+        ticketRepository.save(temp);
+    }
 }
