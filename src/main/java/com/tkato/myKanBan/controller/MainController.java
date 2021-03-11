@@ -37,7 +37,7 @@ public class MainController {
     @Autowired
     TicketService ticketService;
 
-    // TODO: Get a specific ticket
+    // TODO: Get all tickets for a specific project
     // TODO: Update a ticket
     // TODO: Delete a ticket
 
@@ -77,6 +77,12 @@ public class MainController {
     @GetMapping("/alltickets")
     public List<Ticket> getAllTickets() {
         return ticketService.getAllTickets();
+    }
+
+    // TODO: Integration test
+    @GetMapping("/ticket/{id}")
+    public Ticket getTicket(@PathVariable Integer id) {
+        return ticketService.getTicket(id);
     }
 
     @PostMapping("/addticket")
