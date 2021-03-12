@@ -1,29 +1,16 @@
 import './App.css';
+import Header from "./components/Header";
 import ProjectContainer from "./components/ProjectContainer";
 // import KanBanContainer from "./components/KanBanContainer";
 import {
-  BrowserRouter,
   Switch,
   Route,
-  Link
 } from 'react-router-dom'
 
 function App() {
   return (
       <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/project">Project</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
+        <Header />
 
         <Switch>
           <Route exact path="/">
