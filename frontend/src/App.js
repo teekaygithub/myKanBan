@@ -11,33 +11,31 @@ import {
 function App() {
   return (
       <div className="App">
-        <BrowserRouter>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/project">Project</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-            </ul>
-          </nav>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/project">Project</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+          </ul>
+        </nav>
 
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/project">
-              <ProjectContainer />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-          </Switch>
-        </BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/project">
+            <ProjectContainer />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+        </Switch>
       </div>
   );
 }
