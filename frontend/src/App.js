@@ -1,7 +1,7 @@
 import './App.css';
 import Header from "./components/Header";
 import ProjectContainer from "./components/ProjectContainer";
-// import KanBanContainer from "./components/KanBanContainer";
+import KanBanContainer from "./components/KanBanContainer";
 import {
   Switch,
   Route,
@@ -16,7 +16,8 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/project">
+          <Route exact path = "/project/:id" component={KanBanContainer} />
+          <Route path="/projects">
             <ProjectContainer />
           </Route>
           <Route path="/about">
