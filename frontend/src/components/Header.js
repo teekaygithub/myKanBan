@@ -8,10 +8,10 @@ function Header () {
               <Link to="/">Home</Link>
             </li>
             <li className='nav-item'>
-              <Link to="/projects">Project</Link>
+              <Link to="/">Register</Link>
             </li>
             <li className='nav-item'>
-              <Link to="/about">About</Link>
+              <Link to="/">Log In</Link>
             </li>
           </ul>
         </nav>
