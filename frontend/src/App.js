@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom'
+import Welcome from './components/Welcome';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Welcome />
           </Route>
           <Route exact path = "/project/:id" component={KanBanContainer} />
           <Route path="/projects">
@@ -27,14 +28,6 @@ function App() {
       </div>
   );
 }
-
-function Home () {
-  return (
-    <div>
-      <h1>Home</h1>
-    </div>
-  );
-};
 
 function About () {
   return (
