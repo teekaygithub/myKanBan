@@ -16,7 +16,7 @@ class KanBanContainer extends Component {
             .then(data => this.setState({tickets: data}))
             .catch(err => console.log(err));
 
-        fetch('http://localhost:8080/api/project/2')
+        fetch('http://localhost:8080/api/project/' + this.props.match.params.id)
             .then(res => res.json())
             .then(data => this.setState({project: data}))
             .catch(err => console.log(err));

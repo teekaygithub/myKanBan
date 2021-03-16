@@ -53,7 +53,12 @@ class App extends Component {
             <Login loginHandler={this.handleLogin} />
           </Route>
           
-          <Route exact path = "/project/:id" component={KanBanContainer} />
+          <Route 
+            exact path = "/project/:id"
+            render = {props => this.state.loggedIn ? 
+                                    <KanBanContainer {...props} /> : 
+                                    <Redirect to="/login" /> }>
+          </Route>
           
           <Route path="/projects">
             {console.log(`state.loggedIn: ${this.state.loggedIn}`)}
