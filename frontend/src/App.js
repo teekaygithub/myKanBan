@@ -22,11 +22,19 @@ class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
   }
 
+  componentDidMount() {
+    let loggedIn = sessionStorage.getItem('loggedin');
+    if (loggedIn) {
+      this.setState({loggedIn: true});
+    }
+  }
+
   handleLogin(email, pw) {
     if (email === 'test@gmail.com') {
       this.setState({
         loggedIn: true
       });
+      sessionStorage.setItem('loggedin', true);
       console.log(`state.loggedIn: ${this.state.loggedIn}`);
     } else {
       console.log(`INVALID EMAIL: ${email}`);
@@ -37,6 +45,7 @@ class App extends Component {
     this.setState({
       loggedIn:false
     });
+    sessionStorage.removeItem('loggedin');
   }
 
   render() {
@@ -50,7 +59,7 @@ class App extends Component {
           </Route>
           
           <Route path="/login">
-            <Login loginHandler={this.handleLogin} />
+            {this.state.loggedIn ? <Redirect to="/projects" /> : <Login loginHandler={this.handleLogin} />}
           </Route>
           
           <Route 
