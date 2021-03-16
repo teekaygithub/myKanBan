@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Ticket from './Ticket';
+import '../App.css'
 
 class KanBanContainer extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class KanBanContainer extends Component {
 
         if (this.state.tickets.length > 0) {
             return (
-                <div>
+                <div className="container" id="kanban-container">
                     <h1>Project: {this.state.project.title}</h1>
                     {temp}
                 </div>

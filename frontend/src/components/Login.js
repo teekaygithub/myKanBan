@@ -27,6 +27,12 @@ class Login extends Component {
     render () {
         return (
             <div className="container my-5">
+                <div style={{textAlign:"center"}}>
+                    <h1>Thank you for trying out myKanBan!</h1>
+                    <p>Authentication is still under development, so please use the following credential below:</p>
+                    <p>User e-mail address: <strong>test@gmail.com</strong></p>
+                    <p>Password: <strong>1234</strong></p>
+                </div>
                 <h3>Log In</h3>
                 <form>
                     <div className="form-group">
