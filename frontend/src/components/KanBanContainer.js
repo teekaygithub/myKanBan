@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Ticket from './Ticket';
+import Column from './Column';
 import '../App.css'
 
 class KanBanContainer extends Component {
@@ -25,21 +26,25 @@ class KanBanContainer extends Component {
 
     render () {
 
-        const temp = this.state.tickets.map((el, index) => {
-            return (
-                <div key={index}>
-                    <Ticket title={el.title} 
-                        description={el.description}
-                        status={el.status} />
-                </div>
-            );
-        });
+        // const temp = this.state.tickets.map((el, index) => {
+        //     return (
+        //         <div key={index}>
+        //             <Ticket title={el.title} 
+        //                 description={el.description}
+        //                 status={el.status} />
+        //         </div>
+        //     );
+        // });
 
         if (this.state.tickets.length > 0) {
             return (
                 <div className="container" id="kanban-container">
                     <h1>Project: {this.state.project.title}</h1>
-                    {temp}
+                    <div className="column-container row my-5" >
+                        <Column tickets={this.state.tickets} title="TODO" />
+                        <Column tickets={this.state.tickets} title="INPROGRESS" />
+                        <Column tickets={this.state.tickets} title="DONE" />
+                    </div>
                 </div>
             );
         } else {

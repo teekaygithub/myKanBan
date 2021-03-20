@@ -20,6 +20,28 @@
   min-height: 75vh;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+  min-height: 55vh;
+  background-color: rgb(153, 102, 255);
+  margin: 0 1rem;
+  width: 25%;
+  border: 1px solid;
+  border-radius: 15px;
+}
+
+.ticket {
+  max-width: 85%;
+  min-width: 85%;
+  min-height: 100px;
+}
+
+.ticket h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 footer {
   background-color: dimgray;
   padding: 1rem;
