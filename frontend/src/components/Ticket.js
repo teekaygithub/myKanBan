@@ -1,11 +1,28 @@
-var ticket = (props) => {
-    return (
-        <div>
-            <span>{props.title} </span>
-            <span>{props.description} </span>
-            <span>Status: {props.status}</span>
-        </div>
-    );
+import React, {Component} from 'react';
+
+class Ticket extends Component {
+    constructor(props) {
+        super(props);
+        this.handleDrag = this.handleDrag.bind(this);
+    }
+
+    handleDrag(e) {
+        e.dataTransfer.setData("Text", e.target.id);
+    }
+
+    render () {
+        return (
+            <div
+                className="card ticket mx-auto my-2 px-1 py-1"
+                draggable={true}
+                onDragStart={this.handleDrag}
+                id={this.props.id} >
+                <span>{this.props.title} </span>
+                <span>{this.props.description} </span>
+                <span>Status: {this.props.status}</span>
+            </div>
+        );
+    }
 }
 
-export default ticket;
+export default Ticket;
