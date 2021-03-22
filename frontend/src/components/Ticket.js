@@ -16,8 +16,8 @@ class Ticket extends Component {
                 className="card ticket mx-auto my-2 px-1 py-1"
                 draggable={true}
                 onDragStart={this.handleDrag}
-                id={this.props.id} >
-                <span>{this.props.title} </span>
+                id={this.props.ticketid} >
+                <span><strong>{this.props.title}</strong></span>
                 <span>{this.props.description} </span>
                 <span>Status: {this.props.status}</span>
             </div>

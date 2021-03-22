@@ -27,7 +27,9 @@ class Column extends Component {
     handleDrop(e) {
         e.preventDefault();
         let data = e.dataTransfer.getData("Text");
-        e.target.appendChild(document.getElementById(data));
+        if (e.target.className==="column") {
+            e.target.appendChild(document.getElementById(data));
+        }
     }
 
     render () {
@@ -38,14 +40,16 @@ class Column extends Component {
                     title={ticket.title} 
                     description={ticket.description} 
                     status={ticket.status}
-                    id={index} />
+                    ticketid={index} />
             )) : null;
         return (
             <div 
                 className="column"
                 onDragOver={this.allowDrop}
                 onDrop={this.handleDrop} >
-                <h3>{this.props.title}</h3>
+                <h3 className="mx-auto py-2">
+                    {this.props.title}
+                </h3>
                 {ticketComponents}
             </div>
         );

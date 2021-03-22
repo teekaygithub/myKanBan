@@ -39,7 +39,9 @@ class KanBanContainer extends Component {
         if (this.state.tickets.length > 0) {
             return (
                 <div className="container" id="kanban-container">
-                    <h1>Project: {this.state.project.title}</h1>
+                    <h1>
+                        Project: {this.state.project.title}
+                    </h1>
                     <div className="column-container row my-5" >
                         <Column tickets={this.state.tickets} title="TODO" />
                         <Column tickets={this.state.tickets} title="INPROGRESS" />
