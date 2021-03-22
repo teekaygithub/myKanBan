@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
+import {Link} from 'react-router-dom';
 
 class ProjectContainer extends React.Component {
     constructor(props) {
@@ -38,8 +39,18 @@ class ProjectContainer extends React.Component {
                         Your Active Projects
                     </h1>
                     <div 
-                        className="container-fluid card-deck py-5 justify-content-center">
+                        className="container-fluid 
+                                    card-deck 
+                                    py-5 
+                                    justify-content-center
+                                    w-75
+                                    mx-auto">
                         {projectElem}
+                    </div>
+                    <div className="d-flex justify-content-end w-75 my-4">
+                        <Link to="/addproject">
+                            <button className="btn btn-primary">+NEW PROJECT</button>
+                        </Link>
                     </div>
                 </div>
             );

@@ -8,6 +8,7 @@ import {
 import Header from "./components/Header";
 import ProjectContainer from "./components/ProjectContainer";
 import KanBanContainer from "./components/KanBanContainer";
+import AddProject from "./components/AddProject";
 import Welcome from './components/Welcome';
 import Footer from './components/Footer';
 import Login from './components/Login';
@@ -72,6 +73,14 @@ class App extends Component {
           <Route path="/projects">
             {console.log(`state.loggedIn: ${this.state.loggedIn}`)}
             {this.state.loggedIn ? <ProjectContainer /> : <Redirect to="/login" />}
+          </Route>
+
+          <Route 
+            path="/addproject"
+            render = {props => this.state.loggedIn ? 
+                                    <AddProject {...props} /> : 
+                                    <Redirect to="/login" />
+            } >
           </Route>
           
           <Route path="/about">
