@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Ticket from './Ticket';
 import Column from './Column';
+import AddTicket from './AddTicket';
 import '../App.css'
 
 class KanBanContainer extends Component {
@@ -26,16 +26,6 @@ class KanBanContainer extends Component {
 
     render () {
 
-        // const temp = this.state.tickets.map((el, index) => {
-        //     return (
-        //         <div key={index}>
-        //             <Ticket title={el.title} 
-        //                 description={el.description}
-        //                 status={el.status} />
-        //         </div>
-        //     );
-        // });
-
         if (this.state.tickets.length > 0) {
             return (
                 <div className="container" id="kanban-container">
@@ -47,6 +37,7 @@ class KanBanContainer extends Component {
                         <Column tickets={this.state.tickets} title="INPROGRESS" />
                         <Column tickets={this.state.tickets} title="DONE" />
                     </div>
+                    <AddTicket {...this.props} project={this.state.project} />
                 </div>
             );
         } else {

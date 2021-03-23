@@ -60,17 +60,17 @@ class App extends Component {
           </Route>
           
           <Route path="/login">
-            {this.state.loggedIn ? <Redirect to="/projects" /> : <Login loginHandler={this.handleLogin} />}
+            <Login loginHandler={this.handleLogin} isAuth={this.state.loggedIn} />
           </Route>
           
           <Route 
-            exact path = "/project/:id"
+            path = "/project/:id"
             render = {props => this.state.loggedIn ? 
                                     <KanBanContainer {...props} /> : 
                                     <Redirect to="/login" /> }>
           </Route>
           
-          <Route path="/projects">
+          <Route path="/showprojects">
             {console.log(`state.loggedIn: ${this.state.loggedIn}`)}
             {this.state.loggedIn ? <ProjectContainer /> : <Redirect to="/login" />}
           </Route>
