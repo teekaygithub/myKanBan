@@ -51,7 +51,8 @@ class AddTicket extends Component {
 
         if (res.status && res.status === 201) {
             console.log(`Pushing to /project/${this.props.match.params.id}`);
-            this.props.history.push("/project/" + this.props.match.params.id);
+            this.handleCloseModal();
+            window.location.reload();
         } else {
             console.log(`POST request failed: ${res.status}`);
         }
@@ -59,7 +60,7 @@ class AddTicket extends Component {
 
     render () {
         return (
-            <div className="container-fluid w-50 my-3">
+            <div className="my-3">
                 <button
                     type="button"
                     className="btn btn-primary"

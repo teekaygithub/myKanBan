@@ -6,7 +6,7 @@ var ProjectCard = (props) => {
     return (
         <div 
             className="card" 
-            style={{minWidth: "300px", minHeight:"300px", textAlign:"center"}}>
+            style={{minWidth: "300px", minHeight:"200px", textAlign:"center"}}>
             <h1>{props.title}</h1>
             <small>{props.description}</small>
             <Link to={link} className="btn stretched-link">Board View</Link>

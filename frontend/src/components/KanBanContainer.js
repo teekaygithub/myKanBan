@@ -29,21 +29,24 @@ class KanBanContainer extends Component {
         if (this.state.tickets.length > 0) {
             return (
                 <div className="container" id="kanban-container">
-                    <h1>
-                        Project: {this.state.project.title}
-                    </h1>
+                    <div className="d-flex justify-content-around">
+                        <h1>
+                            Project: {this.state.project.title}
+                        </h1>
+                        <AddTicket {...this.props} project={this.state.project} />
+                    </div>
                     <div className="column-container row my-5" >
                         <Column tickets={this.state.tickets} title="TODO" />
                         <Column tickets={this.state.tickets} title="INPROGRESS" />
                         <Column tickets={this.state.tickets} title="DONE" />
                     </div>
-                    <AddTicket {...this.props} project={this.state.project} />
                 </div>
             );
         } else {
             return (
-                <div>
+                <div className="d-flex justify-content-center mx-auto">
                     <h1>No ticket found for this project</h1>
+                    <AddTicket {...this.props} project={this.state.project} />
                 </div>
             );
         }

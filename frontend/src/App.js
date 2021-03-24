@@ -17,7 +17,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state={
-      loggedIn:false
+      loggedIn: sessionStorage.getItem('loggedin')
     }
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
@@ -60,7 +60,7 @@ class App extends Component {
           </Route>
           
           <Route path="/login">
-            <Login loginHandler={this.handleLogin} isAuth={this.state.loggedIn} />
+            {this.state.loggedIn ? <Redirect to="/projects" /> : <Login loginHandler={this.handleLogin} />}
           </Route>
           
           <Route 
@@ -70,7 +70,7 @@ class App extends Component {
                                     <Redirect to="/login" /> }>
           </Route>
           
-          <Route path="/showprojects">
+          <Route path="/projects">
             {console.log(`state.loggedIn: ${this.state.loggedIn}`)}
             {this.state.loggedIn ? <ProjectContainer /> : <Redirect to="/login" />}
           </Route>
