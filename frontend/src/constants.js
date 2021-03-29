@@ -1,5 +1,8 @@
 export const PORT = process.env.PORT || 5000; // Default port must match pom.xml
-const API_HOST = `/api`
+let API_HOST = `/api`
+if (window.location.hostname === "localhost" && window.location.port === "3000") {
+    API_HOST = "http://localhost:8080/api"
+}
 
 export const API_ONEPROJECT = API_HOST + "/project/";
 export const API_ALLPROJECTS = API_HOST + "/all/";
