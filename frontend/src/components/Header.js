@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import logo from '../images/logo.JPG';
 
 function Header (props) {
 
@@ -24,9 +25,10 @@ function Header (props) {
 
   return (
     <nav className="navbar navbar-expand-sm bg-dark justify-content-between">
-      <div id="logo">
-        <Link to="/">LOGO</Link>
-        <img />
+      <div id="logo" className="py-3">
+        <Link to="/">
+          <img src={logo} style={{width: "10rem", height: "8rem"}}/>  
+        </Link>
       </div>
       <ul className="navbar-nav">
         {props.loggedIn ? authMenu: nonAuthMenu}
