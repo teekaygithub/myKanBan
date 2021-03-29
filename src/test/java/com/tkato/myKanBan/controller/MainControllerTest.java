@@ -56,42 +56,42 @@ public class MainControllerTest {
         assertEquals(HttpStatus.BAD_REQUEST, res.getStatusCode());
 	}
 
-    // @Test
-    // public void getAllProjectsTest() {
-    //     ResponseEntity<List<Project>> res = restTemplate.exchange(
-    //         "http://localhost:" + port + "/api/all", 
-    //         HttpMethod.GET, 
-    //         null, 
-    //         new ParameterizedTypeReference<List<Project>>(){}
-    //     );
+    @Test
+    public void getAllProjectsTest() {
+        ResponseEntity<List<Project>> res = restTemplate.exchange(
+            "http://localhost:" + port + "/api/all", 
+            HttpMethod.GET, 
+            null, 
+            new ParameterizedTypeReference<List<Project>>(){}
+        );
 
-    //     assertEquals(HttpStatus.OK, res.getStatusCode());
-    // }
+        assertEquals(HttpStatus.OK, res.getStatusCode());
+    }
 
-    // @Test
-    // public void addNewTicketTest() {
-    //     // First get project ID
-    //     ResponseEntity<List<Project>> res = restTemplate.exchange(
-    //         "http://localhost:" + port + "/api/all", 
-    //         HttpMethod.GET, 
-    //         null, 
-    //         new ParameterizedTypeReference<List<Project>>(){}
-    //     );
+    @Test
+    public void addNewTicketTest() {
+        // First get project ID
+        ResponseEntity<List<Project>> res = restTemplate.exchange(
+            "http://localhost:" + port + "/api/all", 
+            HttpMethod.GET, 
+            null, 
+            new ParameterizedTypeReference<List<Project>>(){}
+        );
 
-    //     final Integer projectId = res.getBody().get(0).getId();
+        final Integer projectId = res.getBody().get(0).getId();
 
-    //     // Build new ticket request
-    //     Ticket test = new Ticket();
-    //     test.setTitle("test ticket");
-    //     test.setProjectId(projectId);
-    //     test.setStatus("TODO");
+        // Build new ticket request
+        Ticket test = new Ticket();
+        test.setTitle("test ticket");
+        test.setProjectId(projectId);
+        test.setStatus("TODO");
 
-    //     ResponseEntity<String> response = restTemplate.postForEntity(
-    //         "http://localhost:" + port + "/api/addticket", test, String.class
-    //     );
+        ResponseEntity<String> response = restTemplate.postForEntity(
+            "http://localhost:" + port + "/api/addticket", test, String.class
+        );
 
-    //     assertEquals(HttpStatus.CREATED, response.getStatusCode());
-    // }
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
 
     @Test
     public void getAllTicketsTest() {

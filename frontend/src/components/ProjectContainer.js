@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
 import {Link} from 'react-router-dom';
+import { API_ALLPROJECTS } from '../constants';
 
 class ProjectContainer extends React.Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class ProjectContainer extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/api/all')
+        fetch(API_ALLPROJECTS)
             .then(resp => resp.json())
             .then(data => this.setState({projects: data}))
             .catch(err => console.log(err));

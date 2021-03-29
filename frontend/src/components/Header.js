@@ -3,32 +3,32 @@ import {Link} from 'react-router-dom';
 function Header (props) {
   if (props.loggedIn) {
     return (
-      <nav className="navbar bg-dark">
+      <nav className="navbar navbar-expand-sm bg-dark">
         <ul className='navbar-nav'>
           <li className='nav-item'>
-            <Link to="/">Home</Link>
+            <Link to="/" className="nav-link">Home</Link>
           </li>
           <li className='nav-item'>
-            <Link to="/projects">Projects</Link>
+            <Link to="/projects" className="nav-link">Projects</Link>
           </li>
           <li className='nav-item'>
-            <a href="" onClick={props.logoutHandler}>Log Out</a>
+            <a href="" onClick={props.logoutHandler}  className="nav-link">Log Out</a>
           </li>
         </ul>
       </nav>
     );
   } else {
     return (
-      <nav className="navbar bg-dark">
+      <nav className="navbar navbar-expand-sm bg-dark">
         <ul className='navbar-nav'>
           <li className='nav-item'>
-            <Link to="/">Home</Link>
+            <Link to="/" className="nav-link">Home</Link>
           </li>
           <li className='nav-item'>
-            <Link to="/">Register</Link>
+            <Link to="/" className="nav-link">Register</Link>
           </li>
           <li className='nav-item'>
-            <Link to="/login">Log In</Link>
+            <Link to="/login" className="nav-link">Log In</Link>
           </li>
         </ul>
       </nav>

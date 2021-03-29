@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Column from './Column';
 import AddTicket from './AddTicket';
 import '../App.css'
+import {API_ONEPROJECT, API_ALLTICKETFORPROJECT} from '../constants'
 
 class KanBanContainer extends Component {
     constructor(props) {
@@ -13,12 +14,12 @@ class KanBanContainer extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/api/project/ticket/' + this.props.match.params.id)
+        fetch(API_ALLTICKETFORPROJECT + this.props.match.params.id)
             .then(res => res.json())
             .then(data => this.setState({tickets: data}))
             .catch(err => console.log(err));
 
-        fetch('http://localhost:8080/api/project/' + this.props.match.params.id)
+        fetch(API_ONEPROJECT + this.props.match.params.id)
             .then(res => res.json())
             .then(data => this.setState({project: data}))
             .catch(err => console.log(err));

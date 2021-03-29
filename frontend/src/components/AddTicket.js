@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
+import { API_ADDTICKET } from '../constants';
 
 class AddTicket extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class AddTicket extends Component {
             projectId: this.props.project.id,
             status: 'TODO',
         }
-        const res = await fetch('http://localhost:8080/api/addticket', {
+        const res = await fetch(API_ADDTICKET, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

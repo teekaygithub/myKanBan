@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { API_ADDPROJECT } from '../constants';
 
 class AddProject extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class AddProject extends Component {
     async handleSubmit(e) {
         e.preventDefault()
 
-        const res = await fetch('http://localhost:8080/api/addproject', {
+        const res = await fetch(API_ADDPROJECT, {
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/json'
