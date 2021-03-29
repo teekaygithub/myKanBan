@@ -5,9 +5,6 @@ function Header (props) {
   const authMenu = (
     <>
       <li className='nav-item'>
-        <Link to="/" className="nav-link">Home</Link>
-      </li>
-      <li className='nav-item'>
         <Link to="/projects" className="nav-link">Projects</Link>
       </li>
       <li className='nav-item'>
@@ -18,9 +15,6 @@ function Header (props) {
   const nonAuthMenu = (
     <>
       <li className='nav-item'>
-        <Link to="/" className="nav-link">Home</Link>
-      </li>
-      <li className='nav-item'>
         <Link to="/" className="nav-link">Register</Link>
       </li>
       <li className='nav-item'>
@@ -29,7 +23,11 @@ function Header (props) {
     </>);
 
   return (
-    <nav className="navbar navbar-expand-sm bg-dark">
+    <nav className="navbar navbar-expand-sm bg-dark justify-content-between">
+      <div id="logo">
+        <Link to="/">LOGO</Link>
+        <img />
+      </div>
       <ul className="navbar-nav">
         {props.loggedIn ? authMenu: nonAuthMenu}
       </ul>
