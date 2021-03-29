@@ -5,11 +5,14 @@ var ProjectCard = (props) => {
     const link = "/project/" + props.id;
     return (
         <div 
-            className="card" 
-            style={{minWidth: "300px", minHeight:"200px", textAlign:"center"}}>
-            <h1>{props.title}</h1>
-            <small>{props.description}</small>
-            <Link to={link} className="btn stretched-link">Board View</Link>
+            className="card my-3"
+            style={{maxWidth: "33%", textAlign: "center"}} >
+            <Link 
+                to={link} 
+                className="btn btn-info"
+                style={{height: "100px", fontSize: "1.5rem"}} >
+                    {props.title}
+            </Link>
         </div>
     );
 }

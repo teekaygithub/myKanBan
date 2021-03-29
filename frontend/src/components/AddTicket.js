@@ -61,7 +61,7 @@ class AddTicket extends Component {
 
     render () {
         return (
-            <div className="my-3">
+            <div className="my-3 my-auto">
                 <button
                     type="button"
                     className="btn btn-primary"

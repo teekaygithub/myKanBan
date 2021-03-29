@@ -45,8 +45,12 @@ class KanBanContainer extends Component {
             );
         } else {
             return (
-                <div className="d-flex justify-content-center mx-auto">
-                    <h1>No ticket found for this project</h1>
+                <div 
+                    className="d-flex justify-content-around mx-auto"
+                    id="kanban-container" >
+                    <h1 className="my-auto" >
+                        No ticket found for this project
+                    </h1>
                     <AddTicket {...this.props} project={this.state.project} />
                 </div>
             );

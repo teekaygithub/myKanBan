@@ -22,13 +22,11 @@ class ProjectContainer extends React.Component {
 
         const projectElem = this.state.projects.map((el, index) => {
             return (
-                <div key={index}>
-                    <ProjectCard 
-                        title={el.title} 
-                        description={el.description} 
-                        id={el.id}
-                        className="my-auto" />
-                </div>
+                <ProjectCard
+                    key={index}
+                    title={el.title} 
+                    description={el.description} 
+                    id={el.id} />
             );
         })
 
