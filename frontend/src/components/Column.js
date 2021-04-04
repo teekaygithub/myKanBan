@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { API_ONETICKET } from '../constants';
 import Ticket from './Ticket';
 
 class Column extends Component {
@@ -9,6 +10,7 @@ class Column extends Component {
         }
         this.allowDrop = this.allowDrop.bind(this);
         this.handleDrop = this.handleDrop.bind(this);
+        this.changeTicketStatus = this.changeTicketStatus.bind(this);
     }
 
     componentDidMount() {
@@ -24,12 +26,26 @@ class Column extends Component {
         e.preventDefault();
     }
 
-    handleDrop(e) {
+    async handleDrop(e) {
         e.preventDefault();
-        let data = e.dataTransfer.getData("Text");
-        if (e.target.className==="column") {
-            e.target.appendChild(document.getElementById(data));
+        let data = e.dataTransfer.getData("text/plain");
+        let draggingTicket = JSON.parse(data);
+        if (e.target.className==="column" && await this.changeTicketStatus(draggingTicket)===true) {
+            e.target.appendChild(document.getElementById(draggingTicket.ticketid));
         }
+    }
+
+    async changeTicketStatus(ticketProps) {
+        ticketProps.status = this.props.title;
+        console.log(`PUT to ${API_ONETICKET + ticketProps.ticketid}`);
+        const res = await fetch(API_ONETICKET + ticketProps.ticketid, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(ticketProps),
+        });
+        return res.status == 200 ? true : false;
     }
 
     render () {
@@ -40,7 +56,8 @@ class Column extends Component {
                     title={ticket.title} 
                     description={ticket.description} 
                     status={ticket.status}
-                    ticketid={index} />
+                    ticketid={ticket.id}
+                    projectId={ticket.projectId} />
             )) : null;
         return (
             <div 

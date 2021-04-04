@@ -7,7 +7,7 @@ class Ticket extends Component {
     }
 
     handleDrag(e) {
-        e.dataTransfer.setData("Text", e.target.id);
+        e.dataTransfer.setData("text/plain", JSON.stringify(this.props));
     }
 
     render () {
