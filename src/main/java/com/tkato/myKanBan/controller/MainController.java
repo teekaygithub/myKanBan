@@ -1,6 +1,7 @@
 package com.tkato.myKanBan.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
@@ -12,9 +13,11 @@ import com.tkato.myKanBan.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,11 +48,18 @@ public class MainController {
         return projectService.getAllProjects();
     }
 
-    // TODO: Handle 'NoSuchElementException'
     // TODO: Integration test
     @GetMapping("/project/{id}")
     public Project getProject(@PathVariable Integer id) {
         return projectService.getProjectById(id);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException exception) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("Cannot find project or ticket");
     }
 
     @PostMapping("/addproject")
