@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @EnableAutoConfiguration
-@RequestMapping("/api")
+@RequestMapping("/api/projects")
 @CrossOrigin("http://localhost:3000")
 @Validated
 public class MainController {
