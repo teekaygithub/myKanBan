@@ -37,7 +37,7 @@ public class UserController {
     
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user) {
-        System.out.println("NOT IMPLEMENTED YET");
-        return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        User newUser = userService.saveUser(user);
+        return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
     }
 }
