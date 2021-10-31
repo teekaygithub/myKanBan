@@ -33,7 +33,7 @@ public class MainControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Test
+    /*@Test
     public void addNewProjectTest() {
         Project test = new Project();
         test.setTitle("test project");
@@ -54,7 +54,7 @@ public class MainControllerTest {
         
         assertNotEquals(HttpStatus.OK, res.getStatusCode());
         assertEquals(HttpStatus.BAD_REQUEST, res.getStatusCode());
-	}
+	}*/
 
     // @Test
     // public void getAllProjectsTest() {
@@ -93,15 +93,15 @@ public class MainControllerTest {
     //     assertEquals(HttpStatus.CREATED, response.getStatusCode());
     // }
 
-    @Test
-    public void getAllTicketsTest() {
-        ResponseEntity<List<Ticket>> res = restTemplate.exchange(
-            "http://localhost:" + port + "/api/alltickets",
-            HttpMethod.GET,
-            null,
-            new ParameterizedTypeReference<List<Ticket>>(){}
-        );
+    // @Test
+    // public void getAllTicketsTest() {
+    //     ResponseEntity<List<Ticket>> res = restTemplate.exchange(
+    //         "http://localhost:" + port + "/api/alltickets",
+    //         HttpMethod.GET,
+    //         null,
+    //         new ParameterizedTypeReference<List<Ticket>>(){}
+    //     );
 
-        assertEquals(HttpStatus.OK, res.getStatusCode());
-    }
+    //     assertEquals(HttpStatus.OK, res.getStatusCode());
+    // }
 }
