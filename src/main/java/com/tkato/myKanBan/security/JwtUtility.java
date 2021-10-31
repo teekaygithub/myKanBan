@@ -13,7 +13,7 @@ public class JwtUtility {
     
     // TODO: constant for secret key
 
-    public String generateToken(String subject, String issuer) throws JWTCreationException {
+    public static String generateToken(String subject, String issuer) throws JWTCreationException {
         Algorithm algorithm = Algorithm.HMAC512("secret");
         Date expiration = new Date(System.currentTimeMillis() + 10 * 60 * 1000);
         String token = JWT.create()
@@ -24,7 +24,7 @@ public class JwtUtility {
         return token;
     }
 
-    public DecodedJWT verifyToken(String token, String issuer) throws JWTVerificationException {
+    public static DecodedJWT verifyToken(String token, String issuer) throws JWTVerificationException {
         Algorithm algorithm = Algorithm.HMAC512("secret");
         JWTVerifier verifier = JWT.require(algorithm)
             .withIssuer(issuer)

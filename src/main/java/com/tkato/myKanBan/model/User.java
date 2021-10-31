@@ -3,6 +3,7 @@ package com.tkato.myKanBan.model;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class User implements UserDetails {
     private Long id;
     @Email(message = "Username must be an email address")
     @NotBlank(message = "Username is required")
+    @Column(unique=true)
     private String username;
     @NotBlank(message = "Full name is required")
     private String fullname;
