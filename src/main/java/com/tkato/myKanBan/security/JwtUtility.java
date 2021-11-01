@@ -24,10 +24,9 @@ public class JwtUtility {
         return token;
     }
 
-    public static DecodedJWT verifyToken(String token, String issuer) throws JWTVerificationException {
+    public static DecodedJWT verifyToken(String token) throws JWTVerificationException {
         Algorithm algorithm = Algorithm.HMAC512("secret");
         JWTVerifier verifier = JWT.require(algorithm)
-            .withIssuer(issuer)
             .build();
         DecodedJWT decoded = verifier.verify(token);
         return decoded;
