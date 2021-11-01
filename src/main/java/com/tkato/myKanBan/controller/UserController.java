@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,6 +29,14 @@ public class UserController {
     public List<User> getUsers() {
         System.out.println("GET all accounts");
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/")
+    public User getUser(@RequestParam String username ) {
+        // TODO: custom exception for user not found
+        System.out.println("GET getUser");
+        User user = userService.getUser(username);
+        return user;
     }
 
     @GetMapping("/test")
