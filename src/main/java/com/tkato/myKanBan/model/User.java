@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -76,6 +78,17 @@ public class User implements UserDetails {
 
     public void setUpdated_date(Date updated_date) {
         this.updated_date = updated_date;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.created_date = new Date();
+        this.updated_date = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updated_date = new Date();
     }
 
     @Override
