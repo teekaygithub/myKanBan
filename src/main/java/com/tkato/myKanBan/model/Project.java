@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table
@@ -25,7 +26,7 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Long id;
 
     @Column
     @NotEmpty(message = "Please input a project title")
@@ -35,6 +36,7 @@ public class Project {
     private String description;
 
     @ManyToMany(mappedBy = "project")
+    @JsonIgnore
     private List<User> user = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -63,11 +65,11 @@ public class Project {
         this.user.add(user);
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

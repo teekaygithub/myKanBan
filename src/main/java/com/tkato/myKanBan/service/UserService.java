@@ -2,6 +2,7 @@ package com.tkato.myKanBan.service;
 
 import java.util.List;
 
+import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.User;
 import com.tkato.myKanBan.repository.UserRepository;
 
@@ -32,6 +33,11 @@ public class UserService implements UserDetailsService {
     public User saveUser(User newUser) {
         newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
         return userRepository.save(newUser);
+    }
+
+    public List<Project> getAllProjects(String username) {
+        User user = (User)loadUserByUsername(username);
+        return user.getProject();
     }
 
     @Override

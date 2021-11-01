@@ -1,13 +1,16 @@
 package com.tkato.myKanBan.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.Ticket;
+import com.tkato.myKanBan.model.User;
 import com.tkato.myKanBan.service.ProjectService;
 import com.tkato.myKanBan.service.TicketService;
+import com.tkato.myKanBan.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,6 +35,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     ProjectService projectService;
 
     @Autowired
@@ -41,34 +47,34 @@ public class MainController {
 
     // PROJECT ROUTES
     @GetMapping("/all")
-    public List<Project> getAllProjects() {
-        return projectService.getAllProjects();
+    public List<Project> getAllProjects(Principal principal) {
+        return userService.getAllProjects(principal.getName());
     }
 
     // TODO: Handle 'NoSuchElementException'
     // TODO: Integration test
     @GetMapping("/project/{id}")
-    public Project getProject(@PathVariable Integer id) {
-        return projectService.getProjectById(id);
+    public Project getProject(@PathVariable Integer id, Principal principal) {
+        return projectService.getProject(id, principal.getName());
     }
 
     @PostMapping("/addproject")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addProject(@Valid @RequestBody Project project) {
-        projectService.addNewProject(project);
+    public void addProject(@Valid @RequestBody Project project, Principal principal) {
+        projectService.addNewProject(project, principal.getName());
     }
 
     // TODO: Integration test
     @PutMapping("/project/{id}")
-    public void modifyProject(@PathVariable Integer id, @RequestBody Project project) {
-        projectService.modifyProject(id, project);
+    public void modifyProject(@PathVariable Integer id, @RequestBody Project project, Principal principal) {
+        projectService.modifyProject(id, project, principal.getName());
     }
 
     // TODO: Integration test
     // TODO: Handle 'java.sql.SQLIntegrityConstraintViolationException'
     @DeleteMapping("/project/{id}")
-    public void deleteProject(@PathVariable Integer id) {
-        projectService.deleteProjectById(id);
+    public void deleteProject(@PathVariable Integer id, Principal principal) {
+        projectService.deleteProjectById(id, principal.getName());
     }
 
     // TICKET ROUTES

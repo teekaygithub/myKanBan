@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table
@@ -25,7 +27,7 @@ public class Ticket {
     @Id
     @Column (name="ticketid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ticketId;
+    private Long ticketId;
 
     @Column
     @NotEmpty(message = "Please provide a ticket title")
@@ -34,7 +36,8 @@ public class Ticket {
     @Column
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Project project;
 
     @Enumerated(EnumType.STRING)
@@ -51,11 +54,11 @@ public class Ticket {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updated_date;
 
-    public int getId() {
+    public Long getId() {
         return ticketId;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.ticketId = id;
     }
 
