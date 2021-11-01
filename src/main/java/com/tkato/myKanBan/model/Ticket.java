@@ -1,5 +1,7 @@
 package com.tkato.myKanBan.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,10 +9,15 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table
@@ -27,16 +34,22 @@ public class Ticket {
     @Column
     private String description;
 
-    @Column (name="projectid")
-    // @NotEmpty(message = "Please provide the ID for the associated project")
-    @NotNull(message = "Please provide the ID for the associated project")
-    @PositiveOrZero
-    private Integer projectId;
+    @ManyToOne
+    private Project project;
 
     @Enumerated(EnumType.STRING)
     @Column
     @NotNull(message = "Must start with status of TODO")
     private Status status;
+
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date target_date;
+
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date created_date;
+
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date updated_date;
 
     public int getId() {
         return ticketId;
@@ -62,12 +75,12 @@ public class Ticket {
         this.description = description;
     }
 
-    public Integer getProjectId() {
-        return projectId;
+    public Project getProject() {
+        return project;
     }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public Status getStatus() {
@@ -88,5 +101,41 @@ public class Ticket {
         INPROGRESS,
         DONE,
         CANCELLED
+    }
+
+    public Date getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(Date created_date) {
+        this.created_date = created_date;
+    }
+
+    public Date getUpdated_date() {
+        return updated_date;
+    }
+
+    public void setUpdated_date(Date updated_date) {
+        this.updated_date = updated_date;
+    }
+
+    public Date getTarget_date() {
+        return target_date;
+    }
+
+    public void setTarget_date(Date target_date) {
+        this.target_date = target_date;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        Date now = new Date();
+        this.created_date = now;
+        this.updated_date = now;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updated_date = new Date();
     }
 }
