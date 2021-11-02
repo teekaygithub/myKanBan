@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tkato.myKanBan.exception.ProjectNotFoundException;
 import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.User;
 import com.tkato.myKanBan.repository.ProjectRepository;
@@ -25,16 +26,20 @@ public class ProjectService {
         return projects;
     }
 
-    public Project getProject(Integer id, String username) {
+    public Project getProject(Long id, String username) {
         User user = (User)userService.loadUserByUsername(username);
-        Project project =  projectRepository.findById(id).get();
+        Project project =  projectRepository.findById(id);
+
+        if (project == null) {
+            throw new ProjectNotFoundException(String.format("Could not find project with ID %d", id));
+        }
         
         if (user.getProject().contains(project)) {
             return project;
         } else {
             // Define custom exception for project not found
             // throw new Exception("");
-            return null;
+            throw new ProjectNotFoundException("Project not found in your account");
         }
     }
 
@@ -45,14 +50,15 @@ public class ProjectService {
         projectRepository.save(project);
     }
 
-    public void modifyProject(Integer id, Project project, String username) {
+    public void modifyProject(Long id, Project project, String username) {
         Project temp = getProject(id, username);
         temp.setTitle(project.getTitle());
         temp.setDescription(project.getDescription());
         projectRepository.save(temp);
     }
 
-    public void deleteProjectById(Integer id, String username) {
-        projectRepository.deleteById(id);
+    public void deleteProjectById(Long id, String username) {
+        Project project = getProject(id, username);
+        projectRepository.deleteById(project.getId());
     }
 }

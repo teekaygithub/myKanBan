@@ -30,7 +30,7 @@ public class TicketService {
     }
 
     public void addNewTicket(Ticket ticket) {
-        System.out.format("ticket's project ID: %d\n", ticket.getProjectId());
+        // System.out.format("ticket's project ID: %d\n", ticket.getProjectId());
         ticketRepository.save(ticket);
     }
 
@@ -39,7 +39,7 @@ public class TicketService {
         temp.setTitle(ticket.getTitle());
         temp.setDescription(ticket.getDescription());
         temp.setStatus(ticket.getStatus().toString());
-        temp.setProjectId(ticket.getProjectId());
+        // temp.setProjectId(ticket.getProjectId());
         ticketRepository.save(temp);
     }
 

@@ -54,7 +54,7 @@ public class MainController {
     // TODO: Handle 'NoSuchElementException'
     // TODO: Integration test
     @GetMapping("/project/{id}")
-    public Project getProject(@PathVariable Integer id, Principal principal) {
+    public Project getProject(@PathVariable Long id, Principal principal) {
         return projectService.getProject(id, principal.getName());
     }
 
@@ -66,14 +66,14 @@ public class MainController {
 
     // TODO: Integration test
     @PutMapping("/project/{id}")
-    public void modifyProject(@PathVariable Integer id, @RequestBody Project project, Principal principal) {
+    public void modifyProject(@PathVariable Long id, @RequestBody Project project, Principal principal) {
         projectService.modifyProject(id, project, principal.getName());
     }
 
     // TODO: Integration test
     // TODO: Handle 'java.sql.SQLIntegrityConstraintViolationException'
     @DeleteMapping("/project/{id}")
-    public void deleteProject(@PathVariable Integer id, Principal principal) {
+    public void deleteProject(@PathVariable Long id, Principal principal) {
         projectService.deleteProjectById(id, principal.getName());
     }
 
