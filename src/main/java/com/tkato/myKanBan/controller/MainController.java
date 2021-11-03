@@ -2,12 +2,12 @@ package com.tkato.myKanBan.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
 import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.Ticket;
-import com.tkato.myKanBan.model.User;
 import com.tkato.myKanBan.service.ProjectService;
 import com.tkato.myKanBan.service.TicketService;
 import com.tkato.myKanBan.service.UserService;
@@ -48,7 +48,7 @@ public class MainController {
 
     // PROJECT ROUTES
     @GetMapping("/all")
-    public List<Project> getAllProjects(Principal principal) {
+    public Set<Project> getAllProjects(Principal principal) {
         return userService.getAllProjects(principal.getName());
     }
 

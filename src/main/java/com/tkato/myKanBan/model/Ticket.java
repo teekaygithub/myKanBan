@@ -16,7 +16,6 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,9 +24,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table
 public class Ticket {
     @Id
-    @Column (name="ticketid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ticketId;
+    private Long id;
 
     @Column
     @NotEmpty(message = "Please provide a ticket title")
@@ -36,7 +34,7 @@ public class Ticket {
     @Column
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnore
     private Project project;
 
@@ -45,21 +43,21 @@ public class Ticket {
     @NotNull(message = "Must start with status of TODO")
     private Status status;
 
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date target_date;
 
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date created_date;
 
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_date;
 
     public Long getId() {
-        return ticketId;
+        return id;
     }
 
     public void setId(Long id) {
-        this.ticketId = id;
+        this.id = id;
     }
 
     public String getTitle() {

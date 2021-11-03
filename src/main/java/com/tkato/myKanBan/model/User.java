@@ -1,9 +1,9 @@
 package com.tkato.myKanBan.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -42,14 +42,14 @@ public class User implements UserDetails {
     @NotBlank(message = "Password is required")
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
         name = "user_project",
         joinColumns = { @JoinColumn(name = "user_id") },
         inverseJoinColumns = { @JoinColumn(name = "project_id") }
     )
     @JsonIgnore
-    private List<Project> project = new ArrayList<>();
+    private Set<Project> project = new HashSet<>();
     
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date created_date;
@@ -89,11 +89,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public List<Project> getProject() {
+    public Set<Project> getProject() {
         return project;
     }
 
-    public void setProject(List<Project> project) {
+    public void setProject(Set<Project> project) {
         this.project = project;
     }
 

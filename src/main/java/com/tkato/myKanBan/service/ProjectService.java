@@ -3,8 +3,8 @@ package com.tkato.myKanBan.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.tkato.myKanBan.exception.ProjectAlreadyExists;
 import com.tkato.myKanBan.exception.ProjectNotFoundException;
@@ -21,8 +21,8 @@ public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    public List<Project> getAllProjects() {
-        List<Project> projects = new ArrayList<>();
+    public Set<Project> getAllProjects() {
+        Set<Project> projects = new HashSet<>();
         projectRepository.findAll().forEach(pj -> projects.add(pj));
         return projects;
     }
@@ -75,7 +75,7 @@ public class ProjectService {
     }
 
     private boolean userInProject(Project project, String username) {
-        List<User> userlist = project.getUser();
+        Set<User> userlist = project.getUser();
         for (User u : userlist) {
             if (u.getUsername().equals(username)) {
                 return true;

@@ -1,6 +1,6 @@
-CREATE TABLE IF NOT EXISTS project (
-    id INT NOT NULL AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
-    description VARCHAR(255) DEFAULT NULL,
-    PRIMARY KEY (id)
-);
+-- CREATE TABLE IF NOT EXISTS project (
+--     id INT NOT NULL AUTO_INCREMENT,
+--     title VARCHAR(255) NOT NULL,
+--     description VARCHAR(255) DEFAULT NULL,
+--     PRIMARY KEY (id)
+-- );

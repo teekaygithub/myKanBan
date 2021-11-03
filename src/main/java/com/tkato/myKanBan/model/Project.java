@@ -1,9 +1,10 @@
 package com.tkato.myKanBan.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,10 +43,10 @@ public class Project {
 
     @ManyToMany(mappedBy = "project")
     @JsonIgnore
-    private List<User> user = new ArrayList<>();
+    private Set<User> user = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Ticket> ticket = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "project", orphanRemoval = true)
+    private Set<Ticket> ticket = new HashSet<>();
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date target_date;
@@ -58,11 +59,11 @@ public class Project {
 
     public Project() {}
 
-    public List<User> getUser() {
+    public Set<User> getUser() {
         return user;
     }
 
-    public void setUser(List<User> user) {
+    public void setUser(Set<User> user) {
         this.user = user;
     }
 

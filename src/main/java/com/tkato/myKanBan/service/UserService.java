@@ -1,6 +1,7 @@
 package com.tkato.myKanBan.service;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.User;
@@ -22,8 +23,10 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getAllUsers() {
-        return (List<User>)userRepository.findAll();
+    public Set<User> getAllUsers() {
+        Set<User> users = new HashSet<>();
+        userRepository.findAll().forEach(u -> users.add(u));
+        return users;
     }
 
     public User getUser(String username) {
@@ -35,7 +38,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(newUser);
     }
 
-    public List<Project> getAllProjects(String username) {
+    public Set<Project> getAllProjects(String username) {
         User user = (User)loadUserByUsername(username);
         return user.getProject();
     }

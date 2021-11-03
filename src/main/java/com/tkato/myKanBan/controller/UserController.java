@@ -1,7 +1,6 @@
 package com.tkato.myKanBan.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -26,15 +25,13 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/accounts")
-    public List<User> getUsers() {
-        System.out.println("GET all accounts");
+    public Set<User> getUsers() {
         return userService.getAllUsers();
     }
 
     @GetMapping("/")
     public User getUser(@RequestParam String username ) {
         // TODO: custom exception for user not found
-        System.out.println("GET getUser");
         User user = userService.getUser(username);
         return user;
     }
