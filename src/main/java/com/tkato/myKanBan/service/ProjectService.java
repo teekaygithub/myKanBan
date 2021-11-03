@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tkato.myKanBan.exception.ProjectAlreadyExists;
 import com.tkato.myKanBan.exception.ProjectNotFoundException;
 import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.User;
@@ -44,7 +45,14 @@ public class ProjectService {
     }
 
     public void addNewProject(Project project, String username) {
+        Project existing = projectRepository.findByTitle(project.getTitle());
         User user = (User)userService.loadUserByUsername(username);
+
+        // Do not add the project to the account if it already exists
+        if (existing != null && userInProject(existing, username)) {
+            throw new ProjectAlreadyExists("Project already exists in your account");
+        }
+        
         project.addUser(user);
         user.addProject(project);
         projectRepository.save(project);
@@ -60,5 +68,16 @@ public class ProjectService {
     public void deleteProjectById(Long id, String username) {
         Project project = getProject(id, username);
         projectRepository.deleteById(project.getId());
+    }
+
+    private boolean userInProject(Project project, String username) {
+        List<User> userlist = project.getUser();
+        for (User u : userlist) {
+            if (u.getUsername().equals(username)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

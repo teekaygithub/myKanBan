@@ -10,6 +10,7 @@ import javax.validation.ConstraintViolationException;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tkato.myKanBan.exception.ProjectAlreadyExists;
 import com.tkato.myKanBan.exception.ProjectNotFoundException;
 
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ProjectNotFoundException.class)
     public void handleProjectNotFoundException(ProjectNotFoundException ex, HttpServletResponse response) throws IOException {
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error_message", ex.getMessage());
+        new ObjectMapper().writeValue(response.getOutputStream(), errors);
+    }
+
+    @ExceptionHandler(ProjectAlreadyExists.class)
+    public void handleProjectAlreadyExistsException(ProjectAlreadyExists ex, HttpServletResponse response) throws IOException {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         Map<String, String> errors = new HashMap<>();

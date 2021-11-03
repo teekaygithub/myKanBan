@@ -10,5 +10,7 @@ public interface ProjectRepository extends CrudRepository<Project, Integer> {
 
     public Project findById(Long id);
 
+    public Project findByTitle(String title);
+
     public void deleteById(Long id);
 }
