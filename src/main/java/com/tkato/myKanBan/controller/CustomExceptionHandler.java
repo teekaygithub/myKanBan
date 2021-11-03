@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tkato.myKanBan.exception.ProjectNotFoundException;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     public void handleConstraintViolation(ConstraintViolationException ex, HttpServletResponse response) throws IOException {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
-        response.setContentType("application/json");
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         Map<String, String> errors = new HashMap<>();
         errors.put("error_message", ex.getMessage());
         new ObjectMapper().writeValue(response.getOutputStream(), errors);
@@ -33,7 +34,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ProjectNotFoundException.class)
     public void handleProjectNotFoundException(ProjectNotFoundException ex, HttpServletResponse response) throws IOException {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
-        response.setContentType("application/json");
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         Map<String, String> errors = new HashMap<>();
         errors.put("error_message", ex.getMessage());
         new ObjectMapper().writeValue(response.getOutputStream(), errors);
@@ -44,7 +45,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(JWTCreationException.class)
     public void handleJwtCreationException(JWTCreationException ex, HttpServletResponse response) throws IOException {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
-        response.setContentType("application/json");
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         Map<String, String> errors = new HashMap<>();
         errors.put("error_message", ex.getMessage());
         new ObjectMapper().writeValue(response.getOutputStream(), errors);
@@ -54,7 +55,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(JWTVerificationException.class)
     public void handleJwtVerificationException(JWTVerificationException ex, HttpServletResponse response) throws IOException {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
-        response.setContentType("application/json");
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         Map<String, String> errors = new HashMap<>();
         errors.put("error_message", ex.getMessage());
         new ObjectMapper().writeValue(response.getOutputStream(), errors);
