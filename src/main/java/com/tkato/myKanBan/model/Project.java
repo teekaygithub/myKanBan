@@ -36,7 +36,7 @@ public class Project {
     @Column
     private String description;
 
-    @Column(unique = true)
+    @Column(unique = true, updatable = false)
     @NotBlank(message = "Please enter a project identifier. Must start with an alphabetical character and be 4-5 characters long, all capitals")
     private String projectIdentifier;
 
@@ -47,13 +47,13 @@ public class Project {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Ticket> ticket = new ArrayList<>();
 
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date target_date;
 
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date created_date;
     
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_date;
 
     public Project() {}

@@ -51,10 +51,10 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Project> project = new ArrayList<>();
     
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date created_date;
     
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_date;
     
     public Long getId() {

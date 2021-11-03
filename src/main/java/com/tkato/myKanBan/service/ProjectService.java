@@ -45,13 +45,13 @@ public class ProjectService {
     public void addNewProject(Project project, String username) {
         String PID = project.getProjectIdentifier().toUpperCase();
         Project existing = projectRepository.findByProjectIdentifier(PID);
-        User user = (User)userService.loadUserByUsername(username);
 
         // Do not add the project to the account if it already exists
         if (existing != null && userInProject(existing, username)) {
             throw new ProjectAlreadyExists("Project already exists in your account");
         }
         
+        User user = (User)userService.loadUserByUsername(username);
         project.addUser(user);
         user.addProject(project);
         project.setProjectIdentifier(PID);
@@ -59,10 +59,11 @@ public class ProjectService {
     }
 
     public void modifyProject(Project project, String username) {
-        Project temp = getProject(project.getProjectIdentifier(), username);
-        temp.setTitle(project.getTitle());
-        temp.setDescription(project.getDescription());
-        projectRepository.save(temp);
+        Project existing = getProject(project.getProjectIdentifier(), username);
+        existing.setTitle(project.getTitle());
+        existing.setDescription(project.getDescription());
+        existing.setTarget_date(project.getTarget_date());
+        projectRepository.save(existing);
     }
 
     public void deleteProjectById(String PID, String username) {
