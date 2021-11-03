@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -34,6 +35,10 @@ public class Project {
 
     @Column
     private String description;
+
+    @Column(unique = true)
+    @NotBlank(message = "Please enter a project identifier. Must start with an alphabetical character and be 4-5 characters long, all capitals")
+    private String projectIdentifier;
 
     @ManyToMany(mappedBy = "project")
     @JsonIgnore
@@ -89,6 +94,14 @@ public class Project {
         this.description = description;
     }
 
+    public String getProjectIdentifier() {
+        return projectIdentifier;
+    }
+
+    public void setProjectIdentifier(String projectIdentifier) {
+        this.projectIdentifier = projectIdentifier.toUpperCase();
+    }
+
     public Date getCreated_date() {
         return created_date;
     }
@@ -124,4 +137,5 @@ public class Project {
     protected void onUpdate() {
         this.updated_date = new Date();
     }
+
 }

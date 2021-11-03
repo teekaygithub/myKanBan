@@ -6,11 +6,10 @@ import org.springframework.stereotype.Repository;
 import com.tkato.myKanBan.model.Project;
 
 @Repository
-public interface ProjectRepository extends CrudRepository<Project, Integer> {
+public interface ProjectRepository extends CrudRepository<Project, Long> {
 
-    public Project findById(Long id);
+    public Project findByProjectIdentifier(String projectIdentifier);
 
     public Project findByTitle(String title);
 
-    public void deleteById(Long id);
 }

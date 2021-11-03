@@ -27,25 +27,24 @@ public class ProjectService {
         return projects;
     }
 
-    public Project getProject(Long id, String username) {
+    public Project getProject(String PID, String username) {
         User user = (User)userService.loadUserByUsername(username);
-        Project project =  projectRepository.findById(id);
+        Project project =  projectRepository.findByProjectIdentifier(PID);
 
         if (project == null) {
-            throw new ProjectNotFoundException(String.format("Could not find project with ID %d", id));
+            throw new ProjectNotFoundException(String.format("Could not find project with PID %s", PID));
         }
         
         if (user.getProject().contains(project)) {
             return project;
         } else {
-            // Define custom exception for project not found
-            // throw new Exception("");
             throw new ProjectNotFoundException("Project not found in your account");
         }
     }
 
     public void addNewProject(Project project, String username) {
-        Project existing = projectRepository.findByTitle(project.getTitle());
+        String PID = project.getProjectIdentifier().toUpperCase();
+        Project existing = projectRepository.findByProjectIdentifier(PID);
         User user = (User)userService.loadUserByUsername(username);
 
         // Do not add the project to the account if it already exists
@@ -55,18 +54,22 @@ public class ProjectService {
         
         project.addUser(user);
         user.addProject(project);
+        project.setProjectIdentifier(PID);
         projectRepository.save(project);
     }
 
-    public void modifyProject(Long id, Project project, String username) {
-        Project temp = getProject(id, username);
+    public void modifyProject(Project project, String username) {
+        Project temp = getProject(project.getProjectIdentifier(), username);
         temp.setTitle(project.getTitle());
         temp.setDescription(project.getDescription());
         projectRepository.save(temp);
     }
 
-    public void deleteProjectById(Long id, String username) {
-        Project project = getProject(id, username);
+    public void deleteProjectById(String PID, String username) {
+        Project project = getProject(PID, username);
+        for (User user : project.getUser()) {
+            user.getProject().remove(project);
+        }
         projectRepository.deleteById(project.getId());
     }
 

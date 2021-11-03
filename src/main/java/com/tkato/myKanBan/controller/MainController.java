@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,9 +54,9 @@ public class MainController {
 
     // TODO: Handle 'NoSuchElementException'
     // TODO: Integration test
-    @GetMapping("/project/{id}")
-    public Project getProject(@PathVariable Long id, Principal principal) {
-        return projectService.getProject(id, principal.getName());
+    @GetMapping("/project")
+    public Project getProject(@RequestParam String projectIdentifier, Principal principal) {
+        return projectService.getProject(projectIdentifier, principal.getName());
     }
 
     @PostMapping("/addproject")
@@ -65,16 +66,16 @@ public class MainController {
     }
 
     // TODO: Integration test
-    @PutMapping("/project/{id}")
-    public void modifyProject(@PathVariable Long id, @RequestBody Project project, Principal principal) {
-        projectService.modifyProject(id, project, principal.getName());
+    @PutMapping("/project")
+    public void modifyProject(@Valid @RequestBody Project project, Principal principal) {
+        projectService.modifyProject(project, principal.getName());
     }
 
     // TODO: Integration test
     // TODO: Handle 'java.sql.SQLIntegrityConstraintViolationException'
-    @DeleteMapping("/project/{id}")
-    public void deleteProject(@PathVariable Long id, Principal principal) {
-        projectService.deleteProjectById(id, principal.getName());
+    @DeleteMapping("/project")
+    public void deleteProject(@RequestParam String projectIdentifier, Principal principal) {
+        projectService.deleteProjectById(projectIdentifier, principal.getName());
     }
 
     // TICKET ROUTES
