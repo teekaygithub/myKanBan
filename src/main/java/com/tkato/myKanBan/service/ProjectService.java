@@ -21,6 +21,8 @@ public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
+    // Gets all the available projects regardless of the User
+    // Should only be accessible by admin role
     public Set<Project> getAllProjects() {
         Set<Project> projects = new HashSet<>();
         projectRepository.findAll().forEach(pj -> projects.add(pj));
@@ -42,7 +44,7 @@ public class ProjectService {
         }
     }
 
-    public void addNewProject(Project project, String username) {
+    public Project addNewProject(Project project, String username) {
         String PID = project.getProjectIdentifier().toUpperCase();
         Project existing = projectRepository.findByProjectIdentifier(PID);
 
@@ -55,7 +57,7 @@ public class ProjectService {
         project.addUser(user);
         user.addProject(project);
         project.setProjectIdentifier(PID);
-        projectRepository.save(project);
+        return projectRepository.save(project);
     }
 
     public void modifyProject(Project project, String username) {

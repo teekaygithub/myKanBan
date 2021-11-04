@@ -15,6 +15,7 @@ import com.tkato.myKanBan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -60,9 +61,9 @@ public class MainController {
     }
 
     @PostMapping("/addproject")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addProject(@Valid @RequestBody Project project, Principal principal) {
-        projectService.addNewProject(project, principal.getName());
+    public ResponseEntity<?> addProject(@Valid @RequestBody Project project, Principal principal) {
+        Project newProject = projectService.addNewProject(project, principal.getName());
+        return new ResponseEntity<Project>(newProject, HttpStatus.CREATED);
     }
 
     // TODO: Integration test
@@ -74,8 +75,9 @@ public class MainController {
     // TODO: Integration test
     // TODO: Handle 'java.sql.SQLIntegrityConstraintViolationException'
     @DeleteMapping("/project")
-    public void deleteProject(@RequestParam String projectIdentifier, Principal principal) {
+    public ResponseEntity<?> deleteProject(@RequestParam String projectIdentifier, Principal principal) {
         projectService.deleteProjectById(projectIdentifier, principal.getName());
+        return new ResponseEntity<String>(String.format("Project with PID %s successfully deleted", projectIdentifier), HttpStatus.OK);
     }
 
     // TICKET ROUTES

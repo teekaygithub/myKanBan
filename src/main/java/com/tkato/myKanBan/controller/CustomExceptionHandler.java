@@ -12,9 +12,11 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tkato.myKanBan.exception.ProjectAlreadyExists;
 import com.tkato.myKanBan.exception.ProjectNotFoundException;
+import com.tkato.myKanBan.exception.UserAlreadyExistsException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +25,26 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 @ResponseBody
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
+    // User exceptions
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public void handleUsernameNotFoundException(UsernameNotFoundException ex, HttpServletResponse response) throws IOException {
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error_message", ex.getMessage());
+        new ObjectMapper().writeValue(response.getOutputStream(), errors);
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public void handleUserAlreadyExistsException(UserAlreadyExistsException ex, HttpServletResponse response) throws IOException {
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error_message", ex.getMessage());
+        new ObjectMapper().writeValue(response.getOutputStream(), errors);
+    }
+
+    // Project exceptions
     @ExceptionHandler(ConstraintViolationException.class)
     public void handleConstraintViolation(ConstraintViolationException ex, HttpServletResponse response) throws IOException {
         response.setStatus(HttpStatus.BAD_REQUEST.value());

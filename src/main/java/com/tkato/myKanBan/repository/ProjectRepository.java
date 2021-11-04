@@ -12,4 +12,6 @@ public interface ProjectRepository extends CrudRepository<Project, Long> {
 
     public Project findByTitle(String title);
 
+    public void deleteByProjectIdentifier(String projectIdentifier);
+
 }
