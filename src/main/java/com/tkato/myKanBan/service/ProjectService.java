@@ -60,12 +60,12 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public void modifyProject(Project project, String username) {
+    public Project modifyProject(Project project, String username) {
         Project existing = getProject(project.getProjectIdentifier(), username);
         existing.setTitle(project.getTitle());
         existing.setDescription(project.getDescription());
         existing.setTarget_date(project.getTarget_date());
-        projectRepository.save(existing);
+        return projectRepository.save(existing);
     }
 
     public void deleteProjectById(String PID, String username) {

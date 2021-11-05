@@ -49,15 +49,16 @@ public class MainController {
 
     // PROJECT ROUTES
     @GetMapping("/all")
-    public Set<Project> getAllProjects(Principal principal) {
-        return userService.getAllProjects(principal.getName());
+    public ResponseEntity<Set<Project>> getAllProjects(Principal principal) {
+        return ResponseEntity.ok().body(userService.getAllProjects(principal.getName()));
     }
 
     // TODO: Handle 'NoSuchElementException'
     // TODO: Integration test
     @GetMapping("/project")
-    public Project getProject(@RequestParam String projectIdentifier, Principal principal) {
-        return projectService.getProject(projectIdentifier, principal.getName());
+    public ResponseEntity<Project> getProject(@RequestParam String projectIdentifier, Principal principal) {
+        Project project = projectService.getProject(projectIdentifier, principal.getName());
+        return ResponseEntity.ok().body(project);
     }
 
     @PostMapping("/addproject")
@@ -68,8 +69,9 @@ public class MainController {
 
     // TODO: Integration test
     @PutMapping("/project")
-    public void modifyProject(@Valid @RequestBody Project project, Principal principal) {
-        projectService.modifyProject(project, principal.getName());
+    public ResponseEntity<Project> modifyProject(@Valid @RequestBody Project project, Principal principal) {
+        Project modified = projectService.modifyProject(project, principal.getName());
+        return ResponseEntity.ok().body(modified);
     }
 
     // TODO: Integration test

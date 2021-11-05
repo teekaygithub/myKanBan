@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.Ticket;
+import com.tkato.myKanBan.security.JwtUtility;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 
@@ -66,6 +68,30 @@ public class MainControllerTest {
     //     );
 
     //     assertEquals(HttpStatus.OK, res.getStatusCode());
+    // }
+
+    // @Test
+    // public void getSingleProjectTest() {
+    //     // First login and generate token
+    //     String username = "batman@test.com";
+    //     String pw = "martha";
+
+    //     ResponseEntity<String> auth = restTemplate.postForEntity(
+    //         "http://localhost:" + port + "/api/users/login", 
+    //         "{\"username\":\"" + username + "\", \"password\":\"" + pw + "\"}", 
+    //         String.class
+    //     );
+
+    //     String token = auth.getBody();
+    //     System.out.println(token);
+        
+    //     // ResponseEntity<Project> res = restTemplate.getForEntity(
+    //     //     "http://localhost:" + port + "/api/projects/project?projectIdentifier=TEST", 
+    //     //     Project.class
+    //     // );
+
+    //     // assertEquals(HttpStatus.FORBIDDEN, res.getStatusCode());
+    //     assertEquals(1, 1);
     // }
 
     // @Test
