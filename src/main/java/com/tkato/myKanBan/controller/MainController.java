@@ -1,7 +1,6 @@
 package com.tkato.myKanBan.controller;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -20,13 +19,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -84,36 +81,33 @@ public class MainController {
 
     // TICKET ROUTES
     @GetMapping("/alltickets")
-    public List<Ticket> getAllTickets() {
-        return ticketService.getAllTickets();
-    }
-
-    @GetMapping("/project/ticket/{projectId}")
-    public List<Ticket> getTicketByProject(@PathVariable Integer projectId) {
-        return ticketService.getTicketByProjectId(projectId);
+    public ResponseEntity<Set<Ticket>> getAllTickets(@RequestParam String projectIdentifier, Principal principal) {
+        Set<Ticket> tickets = ticketService.getAllTickets(projectIdentifier, principal.getName());
+        return ResponseEntity.ok().body(tickets);
     }
 
     // TODO: Integration test
-    @GetMapping("/ticket/{id}")
-    public Ticket getTicket(@PathVariable Integer id) {
-        return ticketService.getTicket(id);
+    @GetMapping("/ticket")
+    public ResponseEntity<Ticket> getTicket(@RequestParam String projectIdentifier, @RequestParam String ticketIdentifier, Principal principal) {
+        Ticket ticket = ticketService.getTicket(projectIdentifier, ticketIdentifier, principal.getName());
+        return ResponseEntity.ok().body(ticket);
     }
 
-    @PostMapping("/addticket")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addNewTicket(@RequestBody Ticket ticket) {
-        ticketService.addNewTicket(ticket);
+    @PostMapping("/ticket")
+    public ResponseEntity<Ticket> addNewTicket(@RequestParam String projectIdentifier, @Valid @RequestBody Ticket ticket, Principal principal) {
+        Ticket newTicket = ticketService.addNewTicket(ticket, projectIdentifier, principal.getName());
+        return new ResponseEntity<Ticket>(newTicket, HttpStatus.CREATED);
     }
 
-    // TODO: Integration test
-    @PutMapping("/ticket/{id}")
-    public void modifyTicket(@PathVariable Integer id, @RequestBody Ticket ticket) {
-        ticketService.modifyTicket(id, ticket);
-    }
+    // // TODO: Integration test
+    // @PutMapping("/ticket/{id}")
+    // public void modifyTicket(@PathVariable Integer id, @RequestBody Ticket ticket) {
+    //     ticketService.modifyTicket(id, ticket);
+    // }
 
-    // TODO: Integration test
-    @DeleteMapping("/ticket/{id}")
-    public void deleteTicket(@PathVariable Integer id) {
-        ticketService.deleteTicket(id);
-    }
+    // // TODO: Integration test
+    // @DeleteMapping("/ticket/{id}")
+    // public void deleteTicket(@PathVariable Integer id) {
+    //     ticketService.deleteTicket(id);
+    // }
 }

@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,6 +32,10 @@ public class Ticket {
 
     @Column
     private String description;
+
+    private String ticketIdentifier;
+
+    private String projectIdentifier;
 
     @ManyToOne
     @JsonIgnore
@@ -74,6 +77,22 @@ public class Ticket {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTicketIdentifier() {
+        return ticketIdentifier;
+    }
+
+    public void setTicketIdentifier(String ticketIdentifier) {
+        this.ticketIdentifier = ticketIdentifier;
+    }
+
+    public String getProjectIdentifier() {
+        return projectIdentifier;
+    }
+
+    public void setProjectIdentifier(String projectIdentifier) {
+        this.projectIdentifier = projectIdentifier;
     }
 
     public Project getProject() {

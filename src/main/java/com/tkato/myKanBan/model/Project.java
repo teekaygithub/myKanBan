@@ -41,6 +41,8 @@ public class Project {
     @NotBlank(message = "Please enter a project identifier. Must start with an alphabetical character and be 4-5 characters long, all capitals")
     private String projectIdentifier;
 
+    private Integer ticketCount = 0;
+
     @ManyToMany(mappedBy = "project")
     @JsonIgnore
     private Set<User> user = new HashSet<>();
@@ -58,18 +60,6 @@ public class Project {
     private Date updated_date;
 
     public Project() {}
-
-    public Set<User> getUser() {
-        return user;
-    }
-
-    public void setUser(Set<User> user) {
-        this.user = user;
-    }
-
-    public void addUser(User user) {
-        this.user.add(user);
-    }
 
     public Long getId() {
         return id;
@@ -103,6 +93,42 @@ public class Project {
         this.projectIdentifier = projectIdentifier.toUpperCase();
     }
 
+    public Integer getTicketCount() {
+        return ticketCount;
+    }
+
+    public void setTicketCount(Integer ticketCount) {
+        this.ticketCount = ticketCount;
+    }
+
+    public Set<User> getUser() {
+        return user;
+    }
+
+    public void setUser(Set<User> user) {
+        this.user = user;
+    }
+
+    public void addUser(User user) {
+        this.user.add(user);
+    }
+
+    public Set<Ticket> getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Set<Ticket> ticket) {
+        this.ticket = ticket;
+    }
+
+    public Date getTarget_date() {
+        return target_date;
+    }
+
+    public void setTarget_date(Date target_date) {
+        this.target_date = target_date;
+    }
+
     public Date getCreated_date() {
         return created_date;
     }
@@ -117,14 +143,6 @@ public class Project {
 
     public void setUpdated_date(Date updated_date) {
         this.updated_date = updated_date;
-    }
-
-    public Date getTarget_date() {
-        return target_date;
-    }
-
-    public void setTarget_date(Date target_date) {
-        this.target_date = target_date;
     }
 
     @PrePersist
