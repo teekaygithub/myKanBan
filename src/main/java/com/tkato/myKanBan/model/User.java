@@ -57,6 +57,14 @@ public class User implements UserDetails {
     
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updated_date;
+
+    public User() {}
+
+    public User(String username, String fullname, String password) {
+        this.username = username;
+        this.fullname = fullname;
+        this.password = password;
+    }
     
     public Long getId() {
         return id;
