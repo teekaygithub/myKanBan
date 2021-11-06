@@ -9,7 +9,6 @@ import com.tkato.myKanBan.model.User;
 import com.tkato.myKanBan.repository.ProjectRepository;
 import com.tkato.myKanBan.repository.UserRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,14 +18,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-    
-    @Autowired
-    private UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+    private final ProjectRepository projectRepository;
 
-    @Autowired
-    private ProjectRepository projectRepository;
+    public UserService(
+        BCryptPasswordEncoder bCryptPasswordEncoder,
+        UserRepository userRepository,
+        ProjectRepository projectRepository) {
+            this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+            this.userRepository = userRepository;
+            this.projectRepository = projectRepository;
+        }
 
     public Set<User> getAllUsers() {
         Set<User> users = new HashSet<>();

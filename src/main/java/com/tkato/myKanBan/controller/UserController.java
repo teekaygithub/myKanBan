@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import com.tkato.myKanBan.model.User;
 import com.tkato.myKanBan.service.UserService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,19 +22,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/accounts")
-    public Set<User> getUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<Set<User>> getUsers() {
+        Set<User> users = userService.getAllUsers();
+        return ResponseEntity.ok().body(users);
     }
 
     @GetMapping("/")
-    public User getUser(@RequestParam String username ) {
-        // TODO: custom exception for user not found
+    public ResponseEntity<User> getUser(@RequestParam String username ) {
         User user = userService.getUser(username);
-        return user;
+        return ResponseEntity.ok().body(user);
     }
     
     @PostMapping("/register")
