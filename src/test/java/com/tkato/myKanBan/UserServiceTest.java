@@ -1,6 +1,7 @@
 package com.tkato.myKanBan;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -62,6 +63,12 @@ public class UserServiceTest {
 
         assertNotNull(users);
         assertEquals(users.size(), this.userList.size());
+        for (User u : users) {
+            assertNotNull(u.getUsername());
+            assertNotNull(u.getFullname());
+            assertNotNull(u.getPassword());
+            assertTrue(u.isEnabled());
+        }
     }
 
     @Test
@@ -79,6 +86,7 @@ public class UserServiceTest {
         assertNotNull(saved);
         assertEquals(saved.getUsername(), "testuser");
         assertEquals(saved.getPassword(), "encodedpw");
+        assertNotEquals(saved.getPassword(), "iloveunitttesting");
         assertTrue(saved.isEnabled());
     }
 }
