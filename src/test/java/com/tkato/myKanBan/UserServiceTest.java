@@ -1,5 +1,6 @@
 package com.tkato.myKanBan;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -31,7 +32,10 @@ public class UserServiceTest {
 
     @Test
     public void getOneUserTest() {
-        when(userRepository.findByUsername(any())).thenReturn(new User());
+        User existing = new User();
+        existing.setUsername("testuser");
+        
+        when(userRepository.findByUsername(any())).thenReturn(existing);
         User user = userService.getUser("testuser");
 
         assertNotNull(user);
@@ -39,5 +43,21 @@ public class UserServiceTest {
         assertTrue(user.isAccountNonLocked());
         assertTrue(user.isAccountNonExpired());
         assertTrue(user.isCredentialsNonExpired());
+    }
+
+    @Test
+    public void saveUserTest() {
+        User newuser = new User();
+        newuser.setUsername("testuser");
+        newuser.setPassword("iloveunitttesting");
+
+        when(userRepository.findByUsername(any())).thenReturn(null);
+        when(userRepository.save(any())).thenReturn(newuser);
+        
+        User saved = userService.saveUser(newuser);
+
+        assertNotNull(saved);
+        assertEquals(saved.getUsername(), "testuser");
+        assertTrue(saved.isEnabled());
     }
 }
