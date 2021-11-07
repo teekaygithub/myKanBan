@@ -31,7 +31,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         UsernamePasswordAuthenticationToken upatoken = new UsernamePasswordAuthenticationToken(username, password);
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         return authenticationManager.authenticate(upatoken);
     }
 
@@ -43,7 +42,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         Map<String, String> token = new HashMap<>();
         token.put("access_token", jwt);
         response.setContentType("application/json");
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         new ObjectMapper().writeValue(response.getOutputStream(), token);
     }
 }
