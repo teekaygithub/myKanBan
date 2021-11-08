@@ -46,22 +46,19 @@ public class TicketService {
     public Ticket addNewTicket(Ticket ticket, String projectIdentifier, String username) {
         Project project = projectService.getProject(projectIdentifier, username);
 
-        Integer ticketNumber = project.getTicketCount();
-        ticket.setProject(project);
-        ticket.setTicketIdentifier(project.getProjectIdentifier() + "-" + Integer.toString(ticketNumber + 1));
-        ticket.setProjectIdentifier(projectIdentifier);
-        project.setTicketCount(ticketNumber + 1);
-        return ticketRepository.save(ticket);
+        // Is this an existing ticket? If so update
+        if (ticket.getId() != null) {
+            return ticketRepository.save(ticket);
+        } else {
+            // Brand new ticket, assign a ticket ID and save
+            Integer ticketNumber = project.getTicketCount();
+            ticket.setProject(project);
+            ticket.setTicketIdentifier(project.getProjectIdentifier() + "-" + Integer.toString(ticketNumber + 1));
+            ticket.setProjectIdentifier(projectIdentifier);
+            project.setTicketCount(ticketNumber + 1);
+            return ticketRepository.save(ticket);
+        }        
     }
-
-    // public void modifyTicket(Integer id, Ticket ticket) {
-    //     Ticket temp = ticketRepository.findById(id).get();
-    //     temp.setTitle(ticket.getTitle());
-    //     temp.setDescription(ticket.getDescription());
-    //     temp.setStatus(ticket.getStatus().toString());
-    //     // temp.setProjectId(ticket.getProjectId());
-    //     ticketRepository.save(temp);
-    // }
 
     // public ResponseEntity<String> deleteTicket(Integer id) {
     //     ticketRepository.deleteById(id);

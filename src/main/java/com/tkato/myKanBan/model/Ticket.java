@@ -33,6 +33,7 @@ public class Ticket {
     @Column
     private String description;
 
+    @Column(unique = true, updatable = false)
     private String ticketIdentifier;
 
     private String projectIdentifier;

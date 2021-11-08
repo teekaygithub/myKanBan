@@ -98,12 +98,6 @@ public class MainController {
     }
 
     // // TODO: Integration test
-    // @PutMapping("/ticket/{id}")
-    // public void modifyTicket(@PathVariable Integer id, @RequestBody Ticket ticket) {
-    //     ticketService.modifyTicket(id, ticket);
-    // }
-
-    // // TODO: Integration test
     // @DeleteMapping("/ticket/{id}")
     // public void deleteTicket(@PathVariable Integer id) {
     //     ticketService.deleteTicket(id);

@@ -21,7 +21,7 @@ public class JwtUtility {
             .withExpiresAt(expiration)
             .withIssuer(issuer)
             .sign(algorithm);
-        return token;
+        return "Bearer " + token;
     }
 
     public static DecodedJWT verifyToken(String token) throws JWTVerificationException {
