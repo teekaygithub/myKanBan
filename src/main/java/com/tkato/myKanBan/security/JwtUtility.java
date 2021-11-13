@@ -15,7 +15,7 @@ public class JwtUtility {
 
     public static String generateToken(String subject, String issuer) throws JWTCreationException {
         Algorithm algorithm = Algorithm.HMAC512("secret");
-        Date expiration = new Date(System.currentTimeMillis() + 10 * 60 * 1000);
+        Date expiration = new Date(System.currentTimeMillis() + 6 * 60 * 60 * 1000);
         String token = JWT.create()
             .withSubject(subject)
             .withExpiresAt(expiration)
