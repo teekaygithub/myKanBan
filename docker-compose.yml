@@ -1,16 +1,28 @@
-version: 1.0
+version: "3.9"
+
 services:
   mydb:
+    container_name: mydb
     image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${SQL_TK_PW}
     volumes:
-      - mkb-mount:/usr/app
+      - mkb-mount:/var/lib/mysql
     networks:
       - mkb
+
   mkb:
     build: .
+    container_name: mkb
     ports:
       - "8080:8080"
     env_file:
       - .env
     networks:
       - mkb
+
+volumes:
+  mkb-mount:
+
+networks:
+  mkb:
