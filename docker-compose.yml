@@ -1,0 +1,16 @@
+version: 1.0
+services:
+  mydb:
+    image: mysql:latest
+    volumes:
+      - mkb-mount:/usr/app
+    networks:
+      - mkb
+  mkb:
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    networks:
+      - mkb
