@@ -13,4 +13,6 @@ public interface TicketRepository extends CrudRepository<Ticket, Long> {
     public Set<Ticket> findAllByProjectIdentifier(String projectIdentifier);
 
     public Ticket findByTicketIdentifier(String ticketIdentifier);
+
+    public void deleteByTicketIdentifier(String ticketIdentifier);
 }

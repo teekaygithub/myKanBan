@@ -2,6 +2,8 @@ package com.tkato.myKanBan.service;
 
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.Ticket;
 import com.tkato.myKanBan.repository.TicketRepository;
@@ -9,6 +11,7 @@ import com.tkato.myKanBan.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class TicketService {
 
     private ProjectService projectService;
@@ -60,8 +63,11 @@ public class TicketService {
         }        
     }
 
-    // public ResponseEntity<String> deleteTicket(Integer id) {
-    //     ticketRepository.deleteById(id);
-    //     return new ResponseEntity<String>(String.format("Successfully deleted ticket ID %d", id), HttpStatus.OK);
-    // }
+    public void deleteTicket(String projectIdentifier, String ticketIdentifier, String username) {
+        Ticket existing = getTicket(projectIdentifier, ticketIdentifier, username);
+        if (existing != null) {
+            ticketRepository.deleteByTicketIdentifier(ticketIdentifier);
+        }
+    }
+
 }

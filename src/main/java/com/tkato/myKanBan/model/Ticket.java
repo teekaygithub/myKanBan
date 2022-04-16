@@ -15,6 +15,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,6 +29,7 @@ public class Ticket {
 
     @Column
     @NotEmpty(message = "Please provide a ticket title")
+    @Size(max=50, message="Ticket names cannot be more than 50 characters")
     private String title;
 
     @Column
@@ -36,6 +38,8 @@ public class Ticket {
     @Column(unique = true, updatable = false)
     private String ticketIdentifier;
 
+    @Column(name="project_identifier")
+    @Size(min=4, max=5, message="Project IDs must be between 4 and 5 characters")
     private String projectIdentifier;
 
     @ManyToOne

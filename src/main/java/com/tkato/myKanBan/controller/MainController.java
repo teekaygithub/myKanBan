@@ -97,9 +97,10 @@ public class MainController {
         return new ResponseEntity<Ticket>(newTicket, HttpStatus.CREATED);
     }
 
-    // // TODO: Integration test
-    // @DeleteMapping("/ticket/{id}")
-    // public void deleteTicket(@PathVariable Integer id) {
-    //     ticketService.deleteTicket(id);
-    // }
+    // TODO: Integration test
+    @DeleteMapping("/ticket")
+    public ResponseEntity<String> deleteTicket(@RequestParam String projectIdentifier, @RequestParam String ticketIdentifier, Principal principal) {
+        ticketService.deleteTicket(projectIdentifier, ticketIdentifier, principal.getName());
+        return new ResponseEntity<String>(String.format("Successfully deleted ticket %s", ticketIdentifier), HttpStatus.OK);
+    }
 }
