@@ -14,17 +14,37 @@ import com.tkato.myKanBan.exception.ProjectAlreadyExists;
 import com.tkato.myKanBan.exception.ProjectNotFoundException;
 import com.tkato.myKanBan.exception.UserAlreadyExistsException;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
 @ResponseBody
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
+    // General
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+            HttpHeaders headers, HttpStatus status, WebRequest request) {
+            Map<String, String> errors = new HashMap<>();
+
+            ex.getBindingResult().getAllErrors().forEach((err) -> {
+                String fieldName = ((FieldError)err).getField();
+                String message = err.getDefaultMessage();
+                errors.put(fieldName, message);
+            });
+
+            return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+    }
+    
     // User exceptions
     @ExceptionHandler(UsernameNotFoundException.class)
     public void handleUsernameNotFoundException(UsernameNotFoundException ex, HttpServletResponse response) throws IOException {
@@ -92,4 +112,5 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         errors.put("error_message", ex.getMessage());
         new ObjectMapper().writeValue(response.getOutputStream(), errors);
     }
+
 }
