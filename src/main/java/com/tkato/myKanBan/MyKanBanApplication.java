@@ -24,7 +24,7 @@ public class MyKanBanApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("https://localhost:3000");
+				registry.addMapping("/**").allowedOrigins("https://localhost:3000", "http://mykanban-fe.s3-website-us-west-1.amazonaws.com");
 			}
 		};
 	}
