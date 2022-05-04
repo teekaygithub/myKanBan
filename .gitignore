@@ -6,8 +6,18 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
-.mvn/timing.properties
+.classpath
+.settings
+.env
+
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
+.mvn/timing.properties
+
+# VS code
 .vscode
+
+# FE
 frontend/node/
+
+*.txt

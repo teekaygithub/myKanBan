@@ -1,9 +1,21 @@
-CREATE TABLE IF NOT EXISTS ticket (
-    ticketid INT NOT NULL AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
-    description VARCHAR(255) DEFAULT NULL,
-    projectid INT NOT NULL,
-    status enum('TODO','INPROGRESS','DONE','CANCELLED') NOT NULL DEFAULT 'TODO',
-    PRIMARY KEY (tickedid),
-    CONSTRAINT fk_projectid FOREIGN KEY ('projectid') REFERENCES project('id')
-);
+-- CREATE TABLE IF NOT EXISTS ticket (
+--     ticketid INT NOT NULL AUTO_INCREMENT,
+--     title VARCHAR(255) NOT NULL,
+--     description VARCHAR(255) DEFAULT NULL,
+--     projectid INT NOT NULL,
+--     status enum('TODO','INPROGRESS','DONE','CANCELLED') NOT NULL DEFAULT 'TODO',
+--     PRIMARY KEY (tickedid),
+--     CONSTRAINT fk_projectid FOREIGN KEY ('projectid') REFERENCES project('id')
+-- );
+
+-- CREATE TABLE IF NOT EXISTS ticket (
+--   `id` bigint NOT NULL AUTO_INCREMENT,
+--   `created_date` datetime(6) DEFAULT NULL,
+--   `description` varchar(255) DEFAULT NULL,
+--   `status` varchar(255) NOT NULL,
+--   `target_date` datetime(6) DEFAULT NULL,
+--   `title` varchar(255) DEFAULT NULL,
+--   `updated_date` datetime(6) DEFAULT NULL,
+--   `project_id` bigint DEFAULT NULL,
+--   PRIMARY KEY (`id`)
+-- );
