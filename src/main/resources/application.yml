@@ -1,0 +1,31 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: ${MKB_HOST}
+    username: ${SQL_TK_USER} 
+    password: ${SQL_TK_PW}
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql: trace
+
+
+## HTTPS ##
+# server:
+#   port: 8443
+#   ssl:
+#     enabled: true
+#     key-alias: mykanban
+#     key-store: classpath:mykanban_keystore.p12
+#     kye-store-password: secret
+#     key-store-type: PKCS12

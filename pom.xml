@@ -114,12 +114,12 @@
 				</resources>
 			</build>
 		</profile>
-		<!-- <profile>
+		<profile>
 			<id>aws</id>
 			<properties>
 				<spring.profiles.active>aws</spring.profiles.active>
 			</properties>
-			<build>
+			<!-- <build>
 				<resources>
 					<resource>
 						<directory>src/main/resources</directory>
@@ -157,8 +157,8 @@
 						</configuration>
 					</plugin>
 				</plugins>
-			</build>
-		</profile> -->
+			</build> -->
+		</profile>
 	</profiles>
 
 </project>

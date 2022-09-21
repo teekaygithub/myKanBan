@@ -59,6 +59,10 @@ public class TicketService {
             ticket.setTicketIdentifier(project.getProjectIdentifier() + "-" + Integer.toString(ticketNumber + 1));
             ticket.setProjectIdentifier(projectIdentifier);
             project.setTicketCount(ticketNumber + 1);
+            String stat = ticket.getStatus();
+            if (stat == null || !stat.equals("TODO")) {
+                ticket.setStatus("TODO");
+            }
             return ticketRepository.save(ticket);
         }        
     }

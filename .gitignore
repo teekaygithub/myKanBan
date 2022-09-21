@@ -17,6 +17,9 @@ buildNumber.properties
 # VS code
 .vscode
 
+# Intellij
+.idea
+
 # FE
 frontend/node/
 

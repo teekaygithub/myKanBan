@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tkato.myKanBan.validator.StringEnumeration;
 
 @Entity
 @Table
@@ -46,10 +47,9 @@ public class Ticket {
     @JsonIgnore
     private Project project;
 
-    @Enumerated(EnumType.STRING)
-    @Column
-    @NotNull(message = "Must start with status of TODO")
-    private Status status;
+    @Column(columnDefinition = "varchar(255) default 'TODO'")
+    @StringEnumeration(enumClass = TicketStatus.class, message = "Ticket status valid values are TODO, INPROGRESS, DONE, and CANCELLED")
+    private String status;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date target_date;
@@ -108,24 +108,12 @@ public class Ticket {
         this.project = project;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
-        for (Status stat : Status.values()) {
-            Status temp = Status.valueOf(status);
-            if (stat.equals(temp)) {
-                this.status = temp;
-            }
-        }
-    }
-
-    public enum Status {
-        TODO,
-        INPROGRESS,
-        DONE,
-        CANCELLED
+        this.status = status;
     }
 
     public Date getCreated_date() {
