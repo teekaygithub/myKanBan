@@ -5,15 +5,13 @@ import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.Ticket;
 import com.tkato.myKanBan.repository.TicketRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TicketServiceTest {
@@ -32,7 +30,7 @@ class TicketServiceTest {
 
     @BeforeEach
     void setUp() {
-        this.uut = new TicketService(projectService, ticketRepository);
+        uut = new TicketService(projectService, ticketRepository);
     }
 
     @Test
@@ -59,12 +57,36 @@ class TicketServiceTest {
     }
 
     @Test
-    @Disabled
+//    @Disabled
     void addNewTicket() {
+        Project project = new Project();
+        project.setTicketCount(42);
+        Ticket ticket = new Ticket();
+
+        when(projectService.getProject(TESTPID, TESTUNAME)).thenReturn(project);
+        Ticket added = uut.addNewTicket(ticket, TESTPID, TESTUNAME);
+        verify(ticketRepository).save(ticket);
     }
 
     @Test
-    @Disabled
+    void addExistingTicket() {
+        Project project = new Project();
+        project.setTicketCount(42);
+        Ticket ticket = new Ticket();
+        ticket.setId(1L); // Existing tickets will have an ID
+
+        when(projectService.getProject(TESTPID, TESTUNAME)).thenReturn(project);
+        Ticket existing = uut.addNewTicket(ticket, TESTPID, TESTUNAME);
+        verify(ticketRepository).save(ticket);
+    }
+
+    @Test
     void deleteTicket() {
+        TicketService spy = spy(uut);
+        Ticket ticket = new Ticket();
+
+        doReturn(ticket).when(spy).getTicket(TESTPID, TESTTID, TESTUNAME);
+        spy.deleteTicket(TESTPID, TESTTID, TESTUNAME);
+        verify(ticketRepository).deleteByTicketIdentifier(TESTTID);
     }
 }

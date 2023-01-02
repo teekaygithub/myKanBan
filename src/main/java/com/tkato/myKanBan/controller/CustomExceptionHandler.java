@@ -12,6 +12,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tkato.myKanBan.exception.ProjectAlreadyExists;
 import com.tkato.myKanBan.exception.ProjectNotFoundException;
+import com.tkato.myKanBan.exception.TicketNotFoundException;
 import com.tkato.myKanBan.exception.UserAlreadyExistsException;
 
 import org.springframework.http.HttpHeaders;
@@ -90,6 +91,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         errors.put("error_message", ex.getMessage());
         new ObjectMapper().writeValue(response.getOutputStream(), errors);
+    }
+
+    @ExceptionHandler(TicketNotFoundException.class)
+    public ResponseEntity<String> handle(TicketNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Requested ticket does not exist");
     }
 
     // JSON web token
