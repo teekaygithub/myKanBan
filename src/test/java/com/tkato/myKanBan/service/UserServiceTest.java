@@ -1,4 +1,4 @@
-package com.tkato.myKanBan;
+package com.tkato.myKanBan.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

@@ -1,6 +1,5 @@
 package com.tkato.myKanBan.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -15,11 +14,14 @@ import com.tkato.myKanBan.repository.ProjectRepository;
 @Service
 public class ProjectService {
 
-    @Autowired
     private UserService userService;
-    
-    @Autowired
+
     private ProjectRepository projectRepository;
+
+    public ProjectService(UserService userService, ProjectRepository projectRepository) {
+        this.userService = userService;
+        this.projectRepository = projectRepository;
+    }
 
     // Gets all the available projects regardless of the User
     // Should only be accessible by admin role
