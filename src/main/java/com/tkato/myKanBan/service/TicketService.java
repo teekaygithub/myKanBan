@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import com.tkato.myKanBan.exception.TicketNotFoundException;
 import com.tkato.myKanBan.model.Project;
 import com.tkato.myKanBan.model.Ticket;
 import com.tkato.myKanBan.repository.TicketRepository;
@@ -35,10 +36,12 @@ public class TicketService {
         projectService.getProject(PID, username);
 
         Ticket ticket = ticketRepository.findByTicketIdentifier(TID);
-        // if (!ticket.getProjectIdentifier().equals(PID)) {
-        //     // TODO: implement exception
-        //     throw new TicketNotFoundException();
-        // }
+
+        // Check existence
+        if (ticket == null || !ticket.getProjectIdentifier().equals(PID)) {
+            throw new TicketNotFoundException("Ticket not found");
+        }
+
         return ticket;
     }
 
